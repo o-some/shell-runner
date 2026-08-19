@@ -1,0 +1,60 @@
+name: Test and Deploy Shell Runner
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: shell-runner-pages
+  cancel-in-progress: false
+
+jobs:
+  build-test-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Materialize immutable source and runtime assets
+        run: npm run materialize
+      - name: Persist materialized migration files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html source.html assets
+          if ! git diff --cached --quiet; then
+            git commit -m "Materialize Shell Runner source and assets"
+            git push origin HEAD:main
+          fi
+      - name: Install reproducibly
+        run: npm ci
+      - name: Smoke tests
+        run: npm test
+      - name: Build
+        run: npm run build
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+      - name: Deploy Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

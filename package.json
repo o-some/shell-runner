@@ -1,0 +1,11 @@
+{
+  "name": "shell-runner",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "materialize": "node scripts/materialize.mjs",
+    "test": "node tests/static.test.mjs",
+    "build": "node scripts/build.mjs"
+  }
+}
