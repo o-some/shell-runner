@@ -13,10 +13,10 @@
 - [ ] Spiel startet
 - [ ] links/rechts Spurwahl funktioniert
 - [ ] richtige Antwort reagiert korrekt
-- [ ] bei richtiger Antwort bewegen sich Tulas Arme/Flipper sichtbar jubelnd nach oben/außen
+- [ ] bei richtiger Antwort erscheint ein kleines Feuerwerk mit Gold-/Türkis-/Weiß-Partikeln
+- [ ] keine künstlichen Tula-Arm-/Kreis-Overlays sichtbar
 - [ ] falsche Antwort reagiert korrekt
-- [ ] bei falscher Antwort sinken/wackeln Tulas Arme/Flipper passend zum Rückstoß
-- [ ] Armbewegung bleibt optisch am Körper verankert und erzeugt keine störenden Doppelarme
+- [ ] falsche Antwort zeigt Rückstoß/Shake und dezente Fehlerfragmente
 - [ ] Leben sinken korrekt
 - [ ] Combo/Punkte funktionieren
 - [ ] Pause maximal 2-mal pro Run
@@ -24,10 +24,15 @@
 - [ ] Boss-Intro erscheint
 - [ ] Boss wartet bis „Bosskampf starten“
 - [ ] Bossfrage funktioniert
-- [ ] Armreaktionen funktionieren auch bei Bossfragen
 - [ ] Boss-Sieg funktioniert
+- [ ] nach Boss-Sieg erscheint „Du hast Captain Shelldon besiegt!“
+- [ ] Boss-Sieg zeigt Bonus und kleines Feuerwerk
+- [ ] Boss-Sieg läuft erst nach Klick auf „Weiter“ weiter
 - [ ] Boss-Niederlage funktioniert ohne normale Leben abzuziehen
+- [ ] Boss-Niederlage zeigt positive Nachricht „Ich ziehe dir keine Herzen ab …“
+- [ ] Boss-Niederlage läuft erst nach Klick auf „Weiter“ weiter
 - [ ] Rückkehr aus Boss in normalen Run funktioniert
+- [ ] Pause-Button steht nach Boss-Ergebnis wieder korrekt auf „Pause (x)“
 - [ ] Game Over funktioniert
 - [ ] Neustart funktioniert
 - [ ] Fortschrittsanzeige funktioniert
