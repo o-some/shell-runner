@@ -13,7 +13,10 @@
 - [ ] Spiel startet
 - [ ] links/rechts Spurwahl funktioniert
 - [ ] richtige Antwort reagiert korrekt
+- [ ] bei richtiger Antwort bewegen sich Tulas Arme/Flipper sichtbar jubelnd nach oben/außen
 - [ ] falsche Antwort reagiert korrekt
+- [ ] bei falscher Antwort sinken/wackeln Tulas Arme/Flipper passend zum Rückstoß
+- [ ] Armbewegung bleibt optisch am Körper verankert und erzeugt keine störenden Doppelarme
 - [ ] Leben sinken korrekt
 - [ ] Combo/Punkte funktionieren
 - [ ] Pause maximal 2-mal pro Run
@@ -21,6 +24,7 @@
 - [ ] Boss-Intro erscheint
 - [ ] Boss wartet bis „Bosskampf starten“
 - [ ] Bossfrage funktioniert
+- [ ] Armreaktionen funktionieren auch bei Bossfragen
 - [ ] Boss-Sieg funktioniert
 - [ ] Boss-Niederlage funktioniert ohne normale Leben abzuziehen
 - [ ] Rückkehr aus Boss in normalen Run funktioniert
