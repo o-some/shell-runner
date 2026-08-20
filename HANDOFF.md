@@ -5,10 +5,10 @@ Shell Runner
 Mobile-first Sprachlern-Endless-Runner für Tula’s Island.
 
 # Aktuelle Version
-v1.0.1-hit-feedback
+v1.1.0-arm-reactions
 
 # Letzte getestete Commit-SHA
-PENDING_LIVE_TEST_AFTER_HIT_FEEDBACK
+PENDING_LIVE_TEST_AFTER_ARM_REACTIONS
 
 # Framework
 Standalone HTML/CSS/JavaScript als stabile Übergangsstruktur. Refactoring nach Astro ist erst nach stabil abgeschlossener Migration vorgesehen.
@@ -26,6 +26,7 @@ Standalone HTML/CSS/JavaScript als stabile Übergangsstruktur. Refactoring nach 
 - Pause maximal 2-mal pro Run.
 - Boss-Intro stoppt das Spiel bis „Bosskampf starten“ gedrückt wird.
 - Trefferfeedback soll klar, hochwertig und kurz sein: korrekt = Sprung/Glow/Partikel, falsch = Rückstoß/Shake/roter Impact.
+- Bei richtig und falsch bewegen sich Tulas Arme/Flipper zusätzlich sichtbar: positiv nach oben jubelnd, negativ nach unten hängend/taumelnd.
 
 # Aktueller Funktionsstand
 - Endless-Runner-Wortauswahl
@@ -38,26 +39,29 @@ Standalone HTML/CSS/JavaScript als stabile Übergangsstruktur. Refactoring nach 
 - Neustart nach Game Over
 - erweitertes Trefferfeedback bei richtiger Antwort: Tula-Sprung, grüner Glow, Gate-Pulse, Muschel-/Stern-Partikel, kurze Haptik sofern vom Gerät unterstützt
 - erweitertes Trefferfeedback bei falscher Antwort: Tula-Rückstoß, Taumeln/Shake, roter Impact, Gate-Fehleranimation, Haptik sofern unterstützt
-- `prefers-reduced-motion` wird für die neuen Effekte berücksichtigt
+- neue Arm-/Flipper-Reaktion bei richtig: beide Arme schwingen deutlich nach oben und außen
+- neue Arm-/Flipper-Reaktion bei falsch: beide Arme sinken ab und wackeln kurz mit dem Rückstoß
+- `prefers-reduced-motion` wird für Treffer- und Armreaktionen berücksichtigt
 
 # Bekannte Fehler
-Keine freigegebenen bekannten Fehler. Live-/Geräteabnahme der neuen Trefferanimationen steht noch aus.
+Keine freigegebenen bekannten Fehler. Live-/Geräteabnahme der neuen Armreaktionen steht noch aus.
 
 # Nächste Schritte
 1. Feature-Branch mit `main` fast-forwarden, falls `main` unverändert ist.
-2. Materialisierung durch Workflow prüfen.
+2. Materialisierung + modularen Arm-Reaction-Schritt durch Workflow prüfen.
 3. Smoke-Test und Build prüfen.
 4. GitHub Pages live testen.
-5. Mobile/Desktop-Regressionsprüfung inkl. richtig/falsch Trefferfeedback.
+5. Mobile/Desktop-Regressionsprüfung inkl. richtig/falsch Treffer- und Armfeedback.
 6. Letzte getestete SHA dokumentieren.
 7. Alte Shell-Runner-Kopie in `tulasisland` weiterhin nicht löschen, solange das Migrations-Freigabe-Gate nicht vollständig bestanden ist.
 
 # Wichtige Dateien
-- `index.html` – aktive Runtime-Version (wird materialisiert)
+- `index.html` – aktive Runtime-Version
 - `source.html` – unveränderte Source-Sicherung vom Source-Commit
-- `scripts/materialize.mjs` – reproduzierbare Übernahme, Pfadanpassung und Runtime-Effekt-Injektion
+- `scripts/materialize.mjs` – reproduzierbare Übernahme, Pfadanpassung und Basis-Trefferfeedback
+- `scripts/apply-arm-reactions.mjs` – modulare positive/negative Arm-/Flipperanimationen für Tula
 - `scripts/build.mjs` – Build nach `dist/`
-- `tests/static.test.mjs` – Smoke-/Integritätschecks inkl. Trefferfeedback
+- `tests/static.test.mjs` – Smoke-/Integritätschecks inkl. Treffer- und Armfeedback
 - `docs/MIGRATION_RECORD.md`
 - `docs/ASSET_MANIFEST.md`
 - `docs/TEST_CHECKLIST.md`
@@ -76,7 +80,7 @@ Runtime-Zielpfade siehe `docs/ASSET_MANIFEST.md`.
 - Workflow: `.github/workflows/pages.yml`
 
 # Letzter erfolgreicher Test
-PENDING_LIVE_TEST_AFTER_HIT_FEEDBACK
+PENDING_LIVE_TEST_AFTER_ARM_REACTIONS
 
 # Wichtige Regeln
 - Keine funktionierende Funktion ohne Anweisung entfernen.
