@@ -5,10 +5,10 @@ Shell Runner
 Mobile-first Sprachlern-Endless-Runner für Tula’s Island.
 
 # Aktuelle Version
-v1.1.0-arm-reactions
+v1.2.0-fireworks-boss-result
 
 # Letzte getestete Commit-SHA
-PENDING_LIVE_TEST_AFTER_ARM_REACTIONS
+PENDING_LIVE_TEST_AFTER_BOSS_RESULT_POLISH
 
 # Framework
 Standalone HTML/CSS/JavaScript als stabile Übergangsstruktur. Refactoring nach Astro ist erst nach stabil abgeschlossener Migration vorgesehen.
@@ -25,8 +25,9 @@ Standalone HTML/CSS/JavaScript als stabile Übergangsstruktur. Refactoring nach 
 - Swipe links/rechts ist primäre Steuerung.
 - Pause maximal 2-mal pro Run.
 - Boss-Intro stoppt das Spiel bis „Bosskampf starten“ gedrückt wird.
-- Trefferfeedback soll klar, hochwertig und kurz sein: korrekt = Sprung/Glow/Partikel, falsch = Rückstoß/Shake/roter Impact.
-- Bei richtig und falsch bewegen sich Tulas Arme/Flipper zusätzlich sichtbar: positiv nach oben jubelnd, negativ nach unten hängend/taumelnd.
+- Trefferfeedback bleibt kurz und klar.
+- Keine künstlichen Tula-Arm-/Kreis-Overlays verwenden.
+- Positive Treffer nutzen kleine Feuerwerks-Partikel in Gold/Türkis/Weiß.
 
 # Aktueller Funktionsstand
 - Endless-Runner-Wortauswahl
@@ -37,31 +38,34 @@ Standalone HTML/CSS/JavaScript als stabile Übergangsstruktur. Refactoring nach 
 - Themen-Boss nach regulären Fragen
 - Boss-Sieg/Niederlage
 - Neustart nach Game Over
-- erweitertes Trefferfeedback bei richtiger Antwort: Tula-Sprung, grüner Glow, Gate-Pulse, Muschel-/Stern-Partikel, kurze Haptik sofern vom Gerät unterstützt
-- erweitertes Trefferfeedback bei falscher Antwort: Tula-Rückstoß, Taumeln/Shake, roter Impact, Gate-Fehleranimation, Haptik sofern unterstützt
-- neue Arm-/Flipper-Reaktion bei richtig: beide Arme schwingen deutlich nach oben und außen
-- neue Arm-/Flipper-Reaktion bei falsch: beide Arme sinken ab und wackeln kurz mit dem Rückstoß
-- `prefers-reduced-motion` wird für Treffer- und Armreaktionen berücksichtigt
+- korrekt: Tula-Sprung, Glow, Gate-Pulse, kleines Feuerwerk mit Partikeln, kurze Haptik sofern unterstützt
+- falsch: Tula-Rückstoß, Shake, roter Impact, kleine Fehlerfragmente, Haptik sofern unterstützt
+- keine künstlichen zusätzlichen Arme/Kreise mehr
+- nach Boss-Sieg erscheint eine Bestätigung „Du hast Captain Shelldon besiegt!“ mit Boss-Bonus und „Weiter“-Button
+- nach Boss-Niederlage erscheint eine positive Meldung mit Hinweis, dass keine Herzen abgezogen werden; Weiterlaufen erst nach Klick auf „Weiter“
+- Boss-Ergebnis blockiert Pause/Neustart bis zur Bestätigung
+- `prefers-reduced-motion` wird für Effekte berücksichtigt
 
 # Bekannte Fehler
-Keine freigegebenen bekannten Fehler. Live-/Geräteabnahme der neuen Armreaktionen steht noch aus.
+Keine freigegebenen bekannten Fehler. Live-/Geräteabnahme der neuen Feuerwerks- und Boss-Ergebnislogik steht noch aus.
 
 # Nächste Schritte
-1. Feature-Branch mit `main` fast-forwarden, falls `main` unverändert ist.
-2. Materialisierung + modularen Arm-Reaction-Schritt durch Workflow prüfen.
+1. Feature-Branch nur fast-forward nach `main`, wenn `main` unverändert ist.
+2. Materialisierung + Gameplay-Polish durch Workflow prüfen.
 3. Smoke-Test und Build prüfen.
 4. GitHub Pages live testen.
-5. Mobile/Desktop-Regressionsprüfung inkl. richtig/falsch Treffer- und Armfeedback.
+5. Mobile/Desktop-Regressionsprüfung inkl. richtig/falsch und Boss-Sieg/Boss-Niederlage.
 6. Letzte getestete SHA dokumentieren.
 7. Alte Shell-Runner-Kopie in `tulasisland` weiterhin nicht löschen, solange das Migrations-Freigabe-Gate nicht vollständig bestanden ist.
 
 # Wichtige Dateien
-- `index.html` – aktive Runtime-Version
+- `index.html` – aktive Runtime-Version, wird reproduzierbar erzeugt
 - `source.html` – unveränderte Source-Sicherung vom Source-Commit
-- `scripts/materialize.mjs` – reproduzierbare Übernahme, Pfadanpassung und Basis-Trefferfeedback
-- `scripts/apply-arm-reactions.mjs` – modulare positive/negative Arm-/Flipperanimationen für Tula
+- `scripts/materialize.mjs` – reproduzierbare Übernahme und Pfadanpassung
+- `scripts/apply-game-polish.mjs` – Feuerwerks-Partikel und Boss-Ergebnislogik
+- `scripts/fix-polish.mjs` – kleine finale Runtime-CSS-Korrektur
 - `scripts/build.mjs` – Build nach `dist/`
-- `tests/static.test.mjs` – Smoke-/Integritätschecks inkl. Treffer- und Armfeedback
+- `tests/static.test.mjs` – Smoke-/Integritätschecks
 - `docs/MIGRATION_RECORD.md`
 - `docs/ASSET_MANIFEST.md`
 - `docs/TEST_CHECKLIST.md`
@@ -80,7 +84,7 @@ Runtime-Zielpfade siehe `docs/ASSET_MANIFEST.md`.
 - Workflow: `.github/workflows/pages.yml`
 
 # Letzter erfolgreicher Test
-PENDING_LIVE_TEST_AFTER_ARM_REACTIONS
+PENDING_LIVE_TEST_AFTER_BOSS_RESULT_POLISH
 
 # Wichtige Regeln
 - Keine funktionierende Funktion ohne Anweisung entfernen.
