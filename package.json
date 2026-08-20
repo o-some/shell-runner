@@ -1,11 +1,11 @@
 {
   "name": "shell-runner",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "private": true,
   "type": "module",
   "scripts": {
     "materialize": "node scripts/materialize.mjs",
-    "enhance": "node scripts/apply-arm-reactions.mjs",
+    "enhance": "node scripts/apply-game-polish.mjs",
     "sync-runtime": "npm run materialize && npm run enhance",
     "test": "node tests/static.test.mjs",
     "build": "node scripts/build.mjs"
