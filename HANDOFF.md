@@ -5,10 +5,10 @@ Shell Runner
 Mobile-first Sprachlern-Endless-Runner für Tula’s Island.
 
 # Aktuelle Version
-v1.0.0-migrating
+v1.0.1-hit-feedback
 
 # Letzte getestete Commit-SHA
-PENDING_FINAL_TEST_SHA
+PENDING_LIVE_TEST_AFTER_HIT_FEEDBACK
 
 # Framework
 Standalone HTML/CSS/JavaScript als stabile Übergangsstruktur. Refactoring nach Astro ist erst nach stabil abgeschlossener Migration vorgesehen.
@@ -25,6 +25,7 @@ Standalone HTML/CSS/JavaScript als stabile Übergangsstruktur. Refactoring nach 
 - Swipe links/rechts ist primäre Steuerung.
 - Pause maximal 2-mal pro Run.
 - Boss-Intro stoppt das Spiel bis „Bosskampf starten“ gedrückt wird.
+- Trefferfeedback soll klar, hochwertig und kurz sein: korrekt = Sprung/Glow/Partikel, falsch = Rückstoß/Shake/roter Impact.
 
 # Aktueller Funktionsstand
 - Endless-Runner-Wortauswahl
@@ -35,24 +36,28 @@ Standalone HTML/CSS/JavaScript als stabile Übergangsstruktur. Refactoring nach 
 - Themen-Boss nach regulären Fragen
 - Boss-Sieg/Niederlage
 - Neustart nach Game Over
+- erweitertes Trefferfeedback bei richtiger Antwort: Tula-Sprung, grüner Glow, Gate-Pulse, Muschel-/Stern-Partikel, kurze Haptik sofern vom Gerät unterstützt
+- erweitertes Trefferfeedback bei falscher Antwort: Tula-Rückstoß, Taumeln/Shake, roter Impact, Gate-Fehleranimation, Haptik sofern unterstützt
+- `prefers-reduced-motion` wird für die neuen Effekte berücksichtigt
 
 # Bekannte Fehler
-Keine freigegebenen bekannten Fehler. Finale Live-/Geräteabnahme steht während der Migration noch aus.
+Keine freigegebenen bekannten Fehler. Live-/Geräteabnahme der neuen Trefferanimationen steht noch aus.
 
 # Nächste Schritte
-1. Materialisierung von Source + Runtime-Assets durch Workflow.
-2. Build/Smoke-Tests.
-3. GitHub Pages + Live-Test.
-4. Mobile/Desktop-Regressionsprüfung.
-5. Dokumentation der final getesteten SHA.
-6. Erst danach Freigabeentscheidung zur Entfernung der Alt-Kopie in `tulasisland`.
+1. Feature-Branch mit `main` fast-forwarden, falls `main` unverändert ist.
+2. Materialisierung durch Workflow prüfen.
+3. Smoke-Test und Build prüfen.
+4. GitHub Pages live testen.
+5. Mobile/Desktop-Regressionsprüfung inkl. richtig/falsch Trefferfeedback.
+6. Letzte getestete SHA dokumentieren.
+7. Alte Shell-Runner-Kopie in `tulasisland` weiterhin nicht löschen, solange das Migrations-Freigabe-Gate nicht vollständig bestanden ist.
 
 # Wichtige Dateien
 - `index.html` – aktive Runtime-Version (wird materialisiert)
 - `source.html` – unveränderte Source-Sicherung vom Source-Commit
-- `scripts/materialize.mjs` – reproduzierbare Übernahme und Pfadanpassung
+- `scripts/materialize.mjs` – reproduzierbare Übernahme, Pfadanpassung und Runtime-Effekt-Injektion
 - `scripts/build.mjs` – Build nach `dist/`
-- `tests/static.test.mjs` – Smoke-/Integritätschecks
+- `tests/static.test.mjs` – Smoke-/Integritätschecks inkl. Trefferfeedback
 - `docs/MIGRATION_RECORD.md`
 - `docs/ASSET_MANIFEST.md`
 - `docs/TEST_CHECKLIST.md`
@@ -71,7 +76,7 @@ Runtime-Zielpfade siehe `docs/ASSET_MANIFEST.md`.
 - Workflow: `.github/workflows/pages.yml`
 
 # Letzter erfolgreicher Test
-PENDING_FINAL_TEST
+PENDING_LIVE_TEST_AFTER_HIT_FEEDBACK
 
 # Wichtige Regeln
 - Keine funktionierende Funktion ohne Anweisung entfernen.
