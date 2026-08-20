@@ -31,6 +31,26 @@
 @keyframes particleBurst{0%{opacity:0;transform:translate(-50%,-50%) scale(.45)}12%{opacity:1}100%{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) rotate(var(--rot)) scale(1.12)}}
 @media(prefers-reduced-motion:reduce){.runner.correct-hit img,.runner.wrong-hit img,.gate.hit-correct,.gate.hit-wrong,.arena.hit-good::after,.arena.hit-bad::after,.hit-particle{animation-duration:.12s!important}}
 
+
+/* Tula arm reactions v1.2 */
+.runner{isolation:isolate}
+.runner>img{position:relative;z-index:3}
+.tula-arm{position:absolute;z-index:2;top:49%;width:40%;height:16%;opacity:0;pointer-events:none;background:linear-gradient(135deg,#86e6d3 0%,#46b7aa 48%,#247879 100%);border:1px solid rgba(255,233,166,.78);box-shadow:inset 0 2px 3px rgba(255,255,255,.3),0 5px 8px rgba(0,18,29,.28);will-change:transform,opacity,filter}
+.tula-arm-left{left:-14%;border-radius:78% 32% 70% 34%;transform-origin:94% 50%}
+.tula-arm-right{right:-14%;border-radius:32% 78% 34% 70%;transform-origin:6% 50%}
+.runner.correct-hit .tula-arm{opacity:.96;filter:saturate(1.08) brightness(1.07)}
+.runner.wrong-hit .tula-arm{opacity:.88;filter:saturate(.72) brightness(.78)}
+.runner.correct-hit .tula-arm-left{animation:tulaArmGoodLeft .56s cubic-bezier(.2,.85,.2,1)!important}
+.runner.correct-hit .tula-arm-right{animation:tulaArmGoodRight .56s cubic-bezier(.2,.85,.2,1)!important}
+.runner.wrong-hit .tula-arm-left{animation:tulaArmBadLeft .56s cubic-bezier(.2,.8,.2,1)!important}
+.runner.wrong-hit .tula-arm-right{animation:tulaArmBadRight .56s cubic-bezier(.2,.8,.2,1)!important}
+@keyframes tulaArmGoodLeft{0%{opacity:.25;transform:translate(0,0) rotate(-10deg) scale(.9)}22%{opacity:1;transform:translate(0,-10px) rotate(-44deg) scale(1.02)}52%{opacity:1;transform:translate(0,-34px) rotate(-78deg) scale(1.08)}76%{opacity:1;transform:translate(0,-9px) rotate(-36deg) scale(1.02)}100%{opacity:.2;transform:translate(0,0) rotate(-10deg) scale(.94)}}
+@keyframes tulaArmGoodRight{0%{opacity:.25;transform:translate(0,0) rotate(10deg) scale(.9)}22%{opacity:1;transform:translate(0,-10px) rotate(44deg) scale(1.02)}52%{opacity:1;transform:translate(0,-34px) rotate(78deg) scale(1.08)}76%{opacity:1;transform:translate(0,-9px) rotate(36deg) scale(1.02)}100%{opacity:.2;transform:translate(0,0) rotate(10deg) scale(.94)}}
+@keyframes tulaArmBadLeft{0%{opacity:.35;transform:translate(0,0) rotate(-6deg) scale(.94)}18%{opacity:.95;transform:translate(-8px,8px) rotate(28deg) scale(.95)}38%{opacity:.95;transform:translate(9px,10px) rotate(48deg) scale(.92)}58%{opacity:.95;transform:translate(-6px,7px) rotate(30deg) scale(.94)}78%{opacity:.9;transform:translate(4px,3px) rotate(42deg) scale(.96)}100%{opacity:.2;transform:translate(0,0) rotate(16deg) scale(.92)}}
+@keyframes tulaArmBadRight{0%{opacity:.35;transform:translate(0,0) rotate(6deg) scale(.94)}18%{opacity:.95;transform:translate(8px,8px) rotate(-28deg) scale(.95)}38%{opacity:.95;transform:translate(-9px,10px) rotate(-48deg) scale(.92)}58%{opacity:.95;transform:translate(6px,7px) rotate(-30deg) scale(.94)}78%{opacity:.9;transform:translate(-4px,3px) rotate(-42deg) scale(.96)}100%{opacity:.2;transform:translate(0,0) rotate(-16deg) scale(.92)}}
+@media(max-width:520px){.tula-arm{top:50%;width:42%;height:15%}.tula-arm-left{left:-15%}.tula-arm-right{right:-15%}}
+@media(prefers-reduced-motion:reduce){.runner.correct-hit .tula-arm,.runner.wrong-hit .tula-arm{animation-duration:.12s!important}}
+
 </style>
 </head>
 <body>
@@ -38,7 +58,7 @@
 <img class="bg" src="./assets/backgrounds/world-jungle-trail.webp" alt=""><div class="shade"></div>
 <header class="top"><div class="brand"><img src="./assets/characters/tula-profile.webp" alt="Tula"><div><strong>Tula's Island</strong><span>SHELL RUNNER</span></div></div><div class="wallet"><div class="chip">🐚 <span id="shells">24</span></div><div class="chip">⭐ <span id="xp">120</span></div></div></header>
 <section class="hud"><div class="stat"><small>PUNKTE</small><b id="score">0</b></div><div class="stat"><small>COMBO</small><b id="combo">x0</b></div><div class="stat"><small>TEMPO</small><b id="speed">1.0×</b></div><div class="stat"><small>LEBEN</small><b id="lives">❤❤❤</b></div><div class="progress"><i id="progress"></i></div></section>
-<section class="arena" id="arena"><div class="road"></div><div class="prompt" id="prompt">Bereit?</div><div class="boss-side" id="bossSide"><img id="bossSideImg" alt="Captain Shelldon"></div><div class="gates" id="gates"></div><div class="runner" id="runner"><img src="./assets/characters/tula-neutral-front.webp" alt="Tula"></div><div class="feedback" id="feedback"></div><div class="impact-layer" id="impactLayer" aria-hidden="true"></div></section>
+<section class="arena" id="arena"><div class="road"></div><div class="prompt" id="prompt">Bereit?</div><div class="boss-side" id="bossSide"><img id="bossSideImg" alt="Captain Shelldon"></div><div class="gates" id="gates"></div><div class="runner" id="runner"><span class="tula-arm tula-arm-left" aria-hidden="true"></span><span class="tula-arm tula-arm-right" aria-hidden="true"></span><img src="./assets/characters/tula-neutral-front.webp" alt="Tula"></div><div class="feedback" id="feedback"></div><div class="impact-layer" id="impactLayer" aria-hidden="true"></div></section>
 <div class="pausebar"><button id="pause">Abenteuer starten</button></div>
 <div class="overlay" id="intro"><div class="modal"><div style="font-size:3.4rem">🐢</div><div class="boss-kicker">TULA'S ISLAND</div><h2>Shell Runner</h2><p>Wische links oder rechts und laufe durch das Tor mit der richtigen Übersetzung. Nach 15 Wörtern wartet ein Themen-Boss.</p><button id="introStart">Abenteuer starten</button></div></div>
 <div class="overlay hidden" id="bossIntro"><div class="modal"><div class="boss-kicker">BOSS-KAMPF</div><div class="boss-art"><img id="bossIntroImg" alt="Captain Shelldon"></div><h2 id="bossName">Captain Shelldon fordert dich heraus!</h2><div class="boss-theme"><small>THEMA</small><strong id="bossTheme">TIERWELT</strong></div><p>Wähle das Wort, das eindeutig zum Thema gehört. Du hast 3 Boss-Versuche; deine normalen Leben bleiben erhalten.</p><button id="bossStart">Bosskampf starten</button></div></div>
