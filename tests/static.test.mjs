@@ -21,6 +21,8 @@ if (!html.includes('Shell Runner')) throw new Error('Shell Runner title missing'
 if (!html.includes('Bosskampf starten')) throw new Error('Boss start interaction missing');
 if (!html.includes('pauseLeft:2')) throw new Error('Pause limit of 2 missing');
 if (!html.includes('touchstart') || !html.includes('touchend')) throw new Error('Touch/swipe handlers missing');
+if (!html.includes('playHitFx') || !html.includes('tulaCorrectHit') || !html.includes('tulaWrongHit')) throw new Error('Enhanced hit feedback missing');
+if (!html.includes('navigator.vibrate') || !html.includes('hit-particle')) throw new Error('Mobile haptics/particle feedback missing');
 if (html.includes('raw.githubusercontent.com/o-some/tulasisland')) throw new Error('Cross-repo runtime asset dependency remains');
 if (!source.includes('raw.githubusercontent.com/o-some/tulasisland')) throw new Error('source.html does not look like untouched source snapshot');
 console.log('Static migration/gameplay smoke checks: PASS');
