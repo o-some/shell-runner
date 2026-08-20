@@ -30,8 +30,8 @@ jobs:
         with:
           node-version: 22
           cache: npm
-      - name: Materialize immutable source and runtime assets
-        run: npm run materialize
+      - name: Materialize runtime and apply gameplay enhancements
+        run: npm run sync-runtime
       - name: Persist materialized migration files
         run: |
           git config user.name "github-actions[bot]"
