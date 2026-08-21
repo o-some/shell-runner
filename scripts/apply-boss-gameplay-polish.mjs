@@ -81,7 +81,7 @@ ${marker}
 @keyframes bossStartledBody{0%,100%{transform:translateY(0) scale(1)}30%{transform:translateY(-5px) scale(.94)}55%{transform:translateY(2px) scale(1.03)}76%{transform:translateY(-2px)}}
 @keyframes bossLaughArmLeft{0%,100%{transform:rotate(27deg)}24%{transform:translate(-7px,-12px) rotate(78deg)}48%{transform:translate(-5px,-8px) rotate(55deg)}72%{transform:translate(-8px,-14px) rotate(82deg)}}
 @keyframes bossLaughArmRight{0%,100%{transform:rotate(-27deg)}24%{transform:translate(7px,-12px) rotate(-78deg)}48%{transform:translate(5px,-8px) rotate(-55deg)}72%{transform:translate(8px,-14px) rotate(-82deg)}}
-@keyframes bossLaughBody{0%,100%{transform:translateY(0) rotate(0)}20%{transform:translateY(-5px) rotate(-3deg)}40%{transform:translateY(1px) rotate(3deg)}60%{transform:translateY(-6px) rotate(-2deg)}80%{transform:translate(0) rotate(2deg)}}
+@keyframes bossLaughBody{0%,100%{transform:translateY(0) rotate(0)}20%{transform:translateY(-5px) rotate(-3deg)}40%{transform:translateY(1px) rotate(3deg)}60%{transform:translateY(-6px) rotate(-2deg)}80%{transform:translateY(0) rotate(2deg)}}
 
 /* Boss-only collectible/hazard layer. */
 .boss-object-layer{position:absolute;z-index:14;inset:0;pointer-events:none;overflow:hidden}
@@ -92,7 +92,7 @@ ${marker}
 .boss-object .object-art{width:100%;height:100%;display:grid;place-items:center;transform-origin:center bottom}
 .boss-object .object-art svg{display:block;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 10px 9px rgba(0,8,16,.32))}
 .boss-object.barrel .object-art{animation:barrelWobble .27s ease-in-out infinite alternate}
-.boss-object.shell .object-art{animation:shellTreasureFloat .ss ease-in-out infinite alternate}
+.boss-object.shell .object-art{animation:shellTreasureFloat .7s ease-in-out infinite alternate}
 .boss-object.shell{width:62px;height:70px}
 .boss-fuse-flame{transform-box:fill-box;transform-origin:center;animation:fuseFlame .12s ease-in-out infinite alternate}
 .boss-object.collected{animation:none!important;opacity:1;top:76%}
@@ -108,8 +108,8 @@ ${marker}
 @keyframes fuseFlame{from{transform:scale(.72) rotate(-8deg);opacity:.78}to{transform:scale(1.18) rotate(8deg);opacity:1}}
 @keyframes shellCollect{0%{opacity:1;transform:scale(1)}55%{opacity:1;transform:scale(1.28) translateY(-10px)}100%{opacity:0;transform:scale(.25) translateY(-34px)}}
 @keyframes bossExplosionRing{0%{opacity:1;transform:translate(-50%,-50%) scale(.2)}100%{opacity:0;transform:translate(-50%,-50%) scale(4.7)}}
-@keyframes bossExplosionParticle{0%{opacity:1;transform:translate(-50%,-50%) scale(.6)}100%{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) rotate(var(--rot)) scale(.25)}}
-@keyframes bossCollectSpark{0%{opacity:1;transform:translate(-50%,-50%) scale(.4)}100%{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy)))) rotate(var(--rot))) scale(.15)}}
+@keyframes bossExplosionParticle{0%{opacity:1;transform:translate(-50%,-50%) scale(.6)}100%{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) rotate(var(--rot)) scale(.25)}}
+@keyframes bossCollectSpark{0%{opacity:1;transform:translate(-50%,-50%) scale(.4)}100%{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) rotate(var(--rot)) scale(.15)}}
 .paused .boss-object,.paused .boss-object *{animation-play-state:paused!important}
 @media(max-width:520px){
   .runner-limb{top:40px;width:15px;height:43px}.runner-limb-left{left:18px}.runner-limb-right{right:18px}
@@ -131,7 +131,7 @@ let bossObjectSpawnTimer=null,bossObjectCollisionTimer=null,bossObjectInitialTim
 function playCharacterReactions(good){
   const runner=$('runner'),boss=$('bossSide');
   if(runner){runner.classList.remove('reaction-correct','reaction-wrong');void runner.offsetWidth;runner.classList.add(good?'reaction-correct':'reaction-wrong')}
-  if(s?.boss&&boss?.classList.contains('totaHoj')){boss.classList.remove('boss-react-startled','boss-react-laugh');void boss.offsetWidth;boss.classList.add(good?'boss-react-startled':'boss-react-laugh')}
+  if(s?.boss&&boss?.classList.contains('show')){boss.classList.remove('boss-react-startled','boss-react-laugh');void boss.offsetWidth;boss.classList.add(good?'boss-react-startled':'boss-react-laugh')}
   setTimeout(()=>{runner?.classList.remove('reaction-correct','reaction-wrong');boss?.classList.remove('boss-react-startled','boss-react-laugh')},840)
 }
 function createBarrelSvg(id){return '<svg viewBox="0 0 96 118" aria-hidden="true"><defs><linearGradient id="wood'+id+'" x1="0" x2="1"><stop offset="0" stop-color="#5e260f"/><stop offset=".24" stop-color="#a64e22"/><stop offset=".5" stop-color="#d17832"/><stop offset=".78" stop-color="#9f441d"/><stop offset="1" stop-color="#4c1d0d"/></linearGradient><linearGradient id="metal'+id+'" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#f2c96d"/><stop offset=".45" stop-color="#8d6729"/><stop offset="1" stop-color="#37240d"/></linearGradient><radialGradient id="ember'+id+'"><stop stop-color="#fff6a5"/><stop offset=".35" stop-color="#ff9d37"/><stop offset="1" stop-color="#ff3b32"/></radialGradient></defs><path d="M24 21C32 14 64 14 72 21L78 95C70 106 26 106 18 95Z" fill="url(#wood'+id+')" stroke="#2b1209" stroke-width="3"/><ellipse cx="48" cy="22" rx="25" ry="8" fill="#8a3d1b" stroke="#2b1209" stroke-width="3"/><path d="M29 25L25 93M40 23L38 98M56 23L58 98M67 25L72 93" stroke="#3d170b" stroke-width="2" opacity=".6"/><path d="M19 41Q48 47 77 41M18 78Q48 84 78 78" fill="none" stroke="url(#metal'+id+')" stroke-width="7"/><circle cx="48" cy="61" r="13" fill="#32160d" opacity=".74"/><path d="M40 57c0-5 4-9 8-9s8 4 8 9c0 4-2 6-4 8l4 5h-5l-3-3-3 3h-5l4-5c-2-2-4-4-4-8Z" fill="#f0d792"/><circle cx="45" cy="57" r="2" fill="#32160d"/><circle cx="51" cy="57" r="2" fill="#32160d"/><path d="M57 21c9-7 10-15 18-15" fill="none" stroke="#28150b" stroke-width="4" stroke-linecap="round"/><circle class="boss-fuse-flame" cx="77" cy="5" r="7" fill="url(#ember'+id+')"/><circle class="boss-fuse-flame" cx="77" cy="5" r="3" fill="#fff6b6"/></svg>'}
@@ -139,18 +139,18 @@ function createShellSvg(id){return '<svg viewBox="0 0 100 90" aria-hidden="true"
 function ensureBossObjectLayer(){return $('bossObjectLayer')}
 function bossRectsOverlap(a,b){const padX=Math.min(a.width,b.width)*.2,padY=Math.min(a.height,b.height)*.18;return a.left+padX<b.right-padX&&a.right-padX>b.left+padX&&a.top+padY<b.bottom-padY&&a.bottom-padY>b.top+padY}
 function bossBurst(el,good){for(let i=0;i<(good?12:16);i++){const p=document.createElement('span');p.className=good?'boss-collect-spark':'boss-explosion-particle';const angle=Math.PI*2*i/(good?12:16)+(Math.random()-.5)*.22,dist=(good?28:34)+Math.random()*(good?34:48);p.style.setProperty('--dx',Math.round(Math.cos(angle)*dist)+'px');p.style.setProperty('--dy',Math.round(Math.sin(angle)*dist)+'px');p.style.setProperty('--rot',Math.round(Math.random()*300-150)+'deg');if(!good)p.style.setProperty('--spark',['#ff513d','#ff9a48','#ffd06b','#e73642'][i%4]);el.appendChild(p)}}
-function collectBossShell(el){if(!el||el.dataset.resolved)return;el.dataset.resolved='1';el.classList.add('collected');bossBurst(el,true);s.shells+=1;s.score+=75;s.xp+=2;render();feedback('🐸 Muschel eingesammelt! +75');vibrate(24);setTimeout(()=>el.remove(),460)}
-function explodeBossBarrel(el,hit){if(!el||el.dataset.resolved)return;el.dataset.resolved='1';el.classList.add('exploding');const ring=document.createElement('span');ring.className='boss-explosion-ring';el.appendChild(ring);bossBurst(el,false);if(hit&&s?.boss){s.bossMiss=Math.min(3,s.bossMiss+1);s.combo=0;render();feedback('💧 Explosives Fass! Boss-Versuch verloren');playCharacterReactions(false);vibrate([62,34,76]);if(s.bossMiss>=3)stopBossObjects(false)}setTimeout(()=>el.remove(),560)}
+function collectBossShell(el){if(!el||el.dataset.resolved)return;el.dataset.resolved='1';el.classList.add('collected');bossBurst(el,true);s.shells+=1;s.score+=75;s.xp+=2;render();feedback('🐚 Muschel eingesammelt! +75');vibrate(24);setTimeout(()=>el.remove(),460)}
+function explodeBossBarrel(el,hit){if(!el||el.dataset.resolved)return;el.dataset.resolved='1';el.classList.add('exploding');const ring=document.createElement('span');ring.className='boss-explosion-ring';el.appendChild(ring);bossBurst(el,false);if(hit&&s?.boss){s.bossMiss=Math.min(3,s.bossMiss+1);s.combo=0;render();feedback('💥 Explosives Fass! Boss-Versuch verloren');playCharacterReactions(false);vibrate([62,34,76]);if(s.bossMiss>=3)stopBossObjects(false)}setTimeout(()=>el.remove(),560)}
 function spawnBossObject(){if(!s?.boss||!s.run||s.paused||s.bossResult||s.bossMiss>=3)return;const layer=ensureBossObjectLayer();if(!layer||layer.children.length>=4)return;const kind=Math.random()<.58?'barrel':'shell',lane=Math.floor(Math.random()*3),id=++bossObjectCounter,el=document.createElement('div');el.className='boss-object '+kind;el.dataset.kind=kind;el.dataset.lane=String(lane);el.style.setProperty('--lane-left',laneLeft[lane]);el.style.setProperty('--fall-time',(kind==='barrel'?3.55+Math.random()*.7:3.9+Math.random()*.9).toFixed(2)+'s');el.innerHTML='<div class="object-art">'+(kind==='barrel'?createBarrelSvg(id):createShellSvg(id))+'</div>';el.addEventListener('animationend',event=>{if(event.animationName!=='bossObjectFall'||el.dataset.resolved)return;if(kind==='barrel')explodeBossBarrel(el,false);else el.remove()},{once:true});layer.appendChild(el)}
 function checkBossObjectCollisions(){if(!s?.boss||!s.run||s.paused||s.bossResult)return;const runner=$('runner');if(!runner)return;const rr=runner.getBoundingClientRect();ensureBossObjectLayer()?.querySelectorAll('.boss-object:not([data-resolved])').forEach(el=>{const r=el.getBoundingClientRect();if(r.top<rr.top-30||r.bottom>rr.bottom+34)return;if(!bossRectsOverlap(r,rr))return;if(el.dataset.kind==='shell')collectBossShell(el);else explodeBossBarrel(el,true)})}
 function startBossObjects(){stopBossObjects();const layer=ensureBossObjectLayer();if(!layer)return;layer.innerHTML='';bossObjectInitialTimer=setTimeout(spawnBossObject,520);bossObjectSpawnTimer=setInterval(spawnBossObject,1320);bossObjectCollisionTimer=setInterval(checkBossObjectCollisions,65)}
 function stopBossObjects(clearLayer=true){clearTimeout(bossObjectInitialTimer);clearInterval(bossObjectSpawnTimer);clearInterval(bossObjectCollisionTimer);bossObjectInitialTimer=bossObjectSpawnTimer=bossObjectCollisionTimer=null;if(clearLayer)ensureBossObjectLayer()?.replaceChildren()}
 `;
-html = html.replace(jsAnchor, ${gameplayJs}\n${jsAnchor}`);
+html = html.replace(jsAnchor, `${gameplayJs}\n${jsAnchor}`);
 
 const hitCall = 'playHitFx(correct,selected,correctGate);';
 if (!html.includes(hitCall)) throw new Error('resolve hit-FX call anchor missing');
-html = html.replace(hitCall, ${hitCall}playCharacterReactions(correct);`);
+html = html.replace(hitCall, `${hitCall}playCharacterReactions(correct);`);
 
 const startBossNeedle = "s.boss=true;s.bossMiss=0;bossRound=0;s.run=true;$('bossIntro').classList.add('hidden');$('bossSide').classList.add('show');render();spawn()}";
 const startBossReplacement = "s.boss=true;s.bossMiss=0;bossRound=0;s.run=true;$('bossIntro').classList.add('hidden');$('bossSide').classList.add('show');$('bossSide').classList.toggle('final-boss',bossIndex===BOSS_PROFILES.length-1);render();spawn();startBossObjects()}";
