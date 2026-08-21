@@ -13,12 +13,18 @@ const bossAssets = [
   'assets/bosses/boss-10-piratenkoenig-varkos.png'
 ];
 
+const reactionAssets = [
+  'assets/characters/tula-celebrating.webp',
+  'assets/characters/tula-surprised.webp'
+];
+
 const required = [
   'index.html',
   'source.html',
   'assets/backgrounds/world-jungle-trail.webp',
   'assets/characters/tula-profile.webp',
   'assets/characters/tula-neutral-front.webp',
+  ...reactionAssets,
   'assets/bosses/captain-shelldon.webp',
   ...bossAssets,
   'HANDOFF.md',
@@ -37,6 +43,12 @@ for (const file of bossAssets) {
     data[0] === 0x89 && data[1] === 0x50 && data[2] === 0x4e && data[3] === 0x47 &&
     data[4] === 0x0d && data[5] === 0x0a && data[6] === 0x1a && data[7] === 0x0a;
   if (!png) throw new Error(`Invalid PNG boss asset: ${file}`);
+}
+
+for (const file of reactionAssets) {
+  const data = fs.readFileSync(file);
+  const webp = data.length > 12 && data.toString('ascii', 0, 4) === 'RIFF' && data.toString('ascii', 8, 12) === 'WEBP';
+  if (!webp) throw new Error(`Invalid WEBP Tula reaction asset: ${file}`);
 }
 
 const html = fs.readFileSync('index.html', 'utf8');
@@ -63,8 +75,6 @@ for (const file of bossAssets) {
 if (html.includes('id="bossResultPortrait" src="data:image')) throw new Error('Boss result still uses embedded/broken data URI');
 
 if (!html.includes('Shell Runner boss gameplay polish v1.5')) throw new Error('Boss gameplay polish missing');
-if (!html.includes('runner-limb-left') || !html.includes('runner-limb-right')) throw new Error('Tula arm reaction overlays missing');
-if (!html.includes('runnerArmUpLeft') || !html.includes('runnerHandMouthLeft')) throw new Error('Tula correct/wrong arm animations missing');
 if (!html.includes('boss-react-startled') || !html.includes('boss-react-laugh')) throw new Error('Boss reaction states missing');
 if (!html.includes('bossHandsMouthLeft') || !html.includes('bossLaughBody')) throw new Error('Boss reaction animations missing');
 if (!html.includes('id="bossObjectLayer"') || !html.includes('startBossObjects')) throw new Error('Boss obstacle/collectible layer missing');
@@ -73,6 +83,11 @@ if (!html.includes('boss-fuse-flame') || !html.includes('barrelWobble')) throw n
 if (!html.includes('explodeBossBarrel') || !html.includes('collectBossShell')) throw new Error('Boss object interaction logic missing');
 if (!html.includes("background:radial-gradient(circle,rgba(255,72,72,.52)") || !html.includes("background:radial-gradient(circle,rgba(255,229,133,.7)")) throw new Error('Red/golden object glow missing');
 if (!html.includes('boss-result-hero{position:relative!important;display:grid!important;place-items:end center!important')) throw new Error('Boss result non-overlap layout missing');
+
+if (!html.includes('Shell Runner official Tula reaction sprites v1.6')) throw new Error('Official Tula reaction sprite polish missing');
+if (!html.includes('./assets/characters/tula-celebrating.webp') || !html.includes('./assets/characters/tula-surprised.webp')) throw new Error('Official Tula reaction assets are not referenced by runtime');
+if (!html.includes('TULA_REACTION_SPRITES')) throw new Error('Tula reaction sprite switching logic missing');
+if (!html.includes('.runner .runner-limb{display:none!important}')) throw new Error('Synthetic Tula reaction limbs are not disabled');
 
 if (html.includes('raw.githubusercontent.com/o-some/tulasisland')) throw new Error('Cross-repo runtime asset dependency remains');
 if (!source.includes('raw.githubusercontent.com/o-some/tulasisland')) throw new Error('source.html does not look like untouched source snapshot');
