@@ -179,6 +179,36 @@
   .boss-object .object-art{animation-duration:.35s!important}
 }
 
+
+/* Shell Runner official Tula reaction sprites v1.6 */
+/* Use official CI sprites for Tula reactions. Hide synthetic Tula limbs, keep boss limbs. */
+.runner .runner-limb{display:none!important}
+.runner.reaction-correct>img{
+  animation:tulaOfficialCelebrate .78s cubic-bezier(.18,.82,.2,1)!important;
+  filter:drop-shadow(0 0 18px rgba(255,225,126,.46)) drop-shadow(0 12px 9px rgba(0,0,0,.38))!important;
+}
+.runner.reaction-wrong>img{
+  animation:tulaOfficialOops .78s cubic-bezier(.2,.78,.2,1)!important;
+  filter:drop-shadow(0 0 15px rgba(255,104,124,.28)) drop-shadow(0 12px 9px rgba(0,0,0,.38))!important;
+}
+@keyframes tulaOfficialCelebrate{
+  0%{transform:translateY(0) scale(1);opacity:.98}
+  24%{transform:translateY(-10px) scale(1.04)}
+  48%{transform:translateY(-27px) scale(1.1)}
+  72%{transform:translateY(-10px) scale(1.045)}
+  100%{transform:translateY(0) scale(1);opacity:1}
+}
+@keyframes tulaOfficialOops{
+  0%{transform:translateY(0) rotate(0) scale(1)}
+  22%{transform:translateY(6px) rotate(-4deg) scale(.97)}
+  45%{transform:translateY(7px) rotate(3deg) scale(.965)}
+  68%{transform:translateY(4px) rotate(-2deg) scale(.985)}
+  100%{transform:translateY(0) rotate(0) scale(1)}
+}
+@media(prefers-reduced-motion:reduce){
+  .runner.reaction-correct>img,.runner.reaction-wrong>img{animation-duration:.18s!important}
+}
+
 </style>
 </head>
 <body>
@@ -212,11 +242,26 @@ function clearHitFx(){const arena=$('arena'),runner=$('runner');arena.classList.
 function burstParticles(good){const layer=$('impactLayer');if(!layer)return;layer.innerHTML='';const runner=$('runner'),arena=$('arena');const rr=runner.getBoundingClientRect(),ar=arena.getBoundingClientRect();const cx=rr.left+rr.width/2-ar.left,cy=rr.top+rr.height*.38-ar.top;const palette=good?['#ffe18a','#79d9c7','#ffffff','#efc867','#8fe7b3']:['#ff7f91','#ffb0bb','#d85b73'];const count=good?18:7;for(let i=0;i<count;i++){const p=document.createElement('span');p.className='firework-particle'+(good?'':' bad');const angle=good?(Math.PI*2*i/count)+(Math.random()-.5)*.18:(Math.PI*.22)+(Math.random()*Math.PI*.56);const distance=good?45+Math.random()*82:30+Math.random()*48;p.style.left=(cx+(good&&i%2===0?-18:good?18:0))+'px';p.style.top=(cy+(good&&i%2===0?-4:good?4:0))+'px';p.style.setProperty('--dx',Math.round(Math.cos(angle)*distance)+'px');p.style.setProperty('--dy',Math.round(Math.sin(angle)*distance-(good?24:0))+'px');p.style.setProperty('--rot',Math.round(Math.random()*260-130)+'deg');p.style.setProperty('--spark',palette[i%palette.length]);p.style.animationDelay=(i%6)*18+'ms';layer.appendChild(p)}setTimeout(()=>{if(layer)layer.innerHTML=''},760)}
 
 let bossObjectSpawnTimer=null,bossObjectCollisionTimer=null,bossObjectInitialTimer=null,bossObjectCounter=0;
+const TULA_REACTION_SPRITES={neutral:'./assets/characters/tula-neutral-front.webp',correct:'./assets/characters/tula-celebrating.webp',wrong:'./assets/characters/tula-surprised.webp'};
+Object.values(TULA_REACTION_SPRITES).forEach(src=>{const preload=new Image();preload.src=src});
 function playCharacterReactions(good){
-  const runner=$('runner'),boss=$('bossSide');
-  if(runner){runner.classList.remove('reaction-correct','reaction-wrong');void runner.offsetWidth;runner.classList.add(good?'reaction-correct':'reaction-wrong')}
-  if(s?.boss&&boss?.classList.contains('show')){boss.classList.remove('boss-react-startled','boss-react-laugh');void boss.offsetWidth;boss.classList.add(good?'boss-react-startled':'boss-react-laugh')}
-  setTimeout(()=>{runner?.classList.remove('reaction-correct','reaction-wrong');boss?.classList.remove('boss-react-startled','boss-react-laugh')},840)
+  const runner=$('runner'),boss=$('bossSide'),runnerImg=runner?.querySelector('img');
+  if(runner){
+    runner.classList.remove('reaction-correct','reaction-wrong');
+    if(runnerImg){runnerImg.src=good?TULA_REACTION_SPRITES.correct:TULA_REACTION_SPRITES.wrong;runnerImg.alt=good?'Tula jubelt':'Tula ist überrascht'}
+    void runner.offsetWidth;
+    runner.classList.add(good?'reaction-correct':'reaction-wrong');
+  }
+  if(s?.boss&&boss?.classList.contains('show')){
+    boss.classList.remove('boss-react-startled','boss-react-laugh');
+    void boss.offsetWidth;
+    boss.classList.add(good?'boss-react-startled':'boss-react-laugh');
+  }
+  setTimeout(()=>{
+    runner?.classList.remove('reaction-correct','reaction-wrong');
+    boss?.classList.remove('boss-react-startled','boss-react-laugh');
+    if(runnerImg){runnerImg.src=TULA_REACTION_SPRITES.neutral;runnerImg.alt='Tula'}
+  },840)
 }
 function createBarrelSvg(id){return '<svg viewBox="0 0 96 118" aria-hidden="true"><defs><linearGradient id="wood'+id+'" x1="0" x2="1"><stop offset="0" stop-color="#5e260f"/><stop offset=".24" stop-color="#a64e22"/><stop offset=".5" stop-color="#d17832"/><stop offset=".78" stop-color="#9f441d"/><stop offset="1" stop-color="#4c1d0d"/></linearGradient><linearGradient id="metal'+id+'" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#f2c96d"/><stop offset=".45" stop-color="#8d6729"/><stop offset="1" stop-color="#37240d"/></linearGradient><radialGradient id="ember'+id+'"><stop stop-color="#fff6a5"/><stop offset=".35" stop-color="#ff9d37"/><stop offset="1" stop-color="#ff3b32"/></radialGradient></defs><path d="M24 21C32 14 64 14 72 21L78 95C70 106 26 106 18 95Z" fill="url(#wood'+id+')" stroke="#2b1209" stroke-width="3"/><ellipse cx="48" cy="22" rx="25" ry="8" fill="#8a3d1b" stroke="#2b1209" stroke-width="3"/><path d="M29 25L25 93M40 23L38 98M56 23L58 98M67 25L72 93" stroke="#3d170b" stroke-width="2" opacity=".6"/><path d="M19 41Q48 47 77 41M18 78Q48 84 78 78" fill="none" stroke="url(#metal'+id+')" stroke-width="7"/><circle cx="48" cy="61" r="13" fill="#32160d" opacity=".74"/><path d="M40 57c0-5 4-9 8-9s8 4 8 9c0 4-2 6-4 8l4 5h-5l-3-3-3 3h-5l4-5c-2-2-4-4-4-8Z" fill="#f0d792"/><circle cx="45" cy="57" r="2" fill="#32160d"/><circle cx="51" cy="57" r="2" fill="#32160d"/><path d="M57 21c9-7 10-15 18-15" fill="none" stroke="#28150b" stroke-width="4" stroke-linecap="round"/><circle class="boss-fuse-flame" cx="77" cy="5" r="7" fill="url(#ember'+id+')"/><circle class="boss-fuse-flame" cx="77" cy="5" r="3" fill="#fff6b6"/></svg>'}
 function createShellSvg(id){return '<svg viewBox="0 0 100 90" aria-hidden="true"><defs><radialGradient id="shell'+id+'" cx="45%" cy="28%"><stop stop-color="#fff9d9"/><stop offset=".38" stop-color="#ffe18a"/><stop offset=".72" stop-color="#d9a535"/><stop offset="1" stop-color="#8b5a13"/></radialGradient><linearGradient id="shine'+id+'" x1="0" x2="1"><stop stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs><path d="M50 10C24 10 11 29 13 51c2 18 16 28 37 28s35-10 37-28C89 29 76 10 50 10Z" fill="url(#shell'+id+')" stroke="#7c5517" stroke-width="3"/><path d="M50 13v63M35 16l8 60M65 16l-8 60M23 27l17 50M77 27L60 77" stroke="#a9731d" stroke-width="3" opacity=".78"/><path d="M26 27c12-11 35-15 50-4" fill="none" stroke="url(#shine'+id+')" stroke-width="5" stroke-linecap="round" opacity=".72"/><path d="M28 77h44c-5 8-13 10-22 10s-17-2-22-10Z" fill="#b57b20" stroke="#744812" stroke-width="2"/></svg>'}
