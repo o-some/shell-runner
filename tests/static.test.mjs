@@ -29,6 +29,10 @@ if (!html.includes('id="bossResult"') || !html.includes('id="bossContinue"')) th
 if (!html.includes('Du hast Captain Shelldon besiegt!')) throw new Error('Boss victory message missing');
 if (!html.includes('Ich ziehe dir keine Herzen ab')) throw new Error('Positive boss-loss/no-heart message missing');
 if (!html.includes('runBossResultFireworks') || !html.includes('continueAfterBoss')) throw new Error('Boss result flow/fireworks missing');
+if (!html.includes('Shell Runner premium boss cutout v1.3')) throw new Error('Premium boss cutout styles missing');
+if (!html.includes('id="bossResultPortrait"')) throw new Error('Boss result portrait missing');
+if (!html.includes('.boss-art,.boss-side{border:0!important')) throw new Error('Boss cutout presentation missing');
+if (!html.includes("const BOSS_IMG='data:image/webp;base64,")) throw new Error('Transparent boss sprite was not embedded');
 if (html.includes('raw.githubusercontent.com/o-some/tulasisland')) throw new Error('Cross-repo runtime asset dependency remains');
 if (!source.includes('raw.githubusercontent.com/o-some/tulasisland')) throw new Error('source.html does not look like untouched source snapshot');
 console.log('Static migration/gameplay smoke checks: PASS');
