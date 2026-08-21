@@ -89,6 +89,14 @@ if (!html.includes('./assets/characters/tula-celebrating.webp') || !html.include
 if (!html.includes('TULA_REACTION_SPRITES')) throw new Error('Tula reaction sprite switching logic missing');
 if (!html.includes('.runner .runner-limb{display:none!important}')) throw new Error('Synthetic Tula reaction limbs are not disabled');
 
+if (!html.includes('Shell Runner boss frequency v1.7')) throw new Error('Boss frequency enhancer missing');
+if (!html.includes('const BOSS_CORRECT_INTERVAL=3;')) throw new Error('Boss interval must be 3 correct words');
+if (!html.includes('bossCorrect:0')) throw new Error('Boss correct-word progress state missing');
+if (!html.includes('if(correct)s.bossCorrect++')) throw new Error('Boss progress must increment only on correct normal answers');
+if (!html.includes('s.bossCorrect>=BOSS_CORRECT_INTERVAL')) throw new Error('Boss trigger does not use correct-word progress');
+if (!html.includes('Nach 3 richtigen Wörtern wartet ein Themen-Boss.')) throw new Error('Boss intro copy does not reflect 3 correct words');
+if (html.includes('s.answered%15===0') || html.includes('(s.answered%15)/15')) throw new Error('Legacy 15-question boss trigger/progress remains');
+
 if (html.includes('raw.githubusercontent.com/o-some/tulasisland')) throw new Error('Cross-repo runtime asset dependency remains');
 if (!source.includes('raw.githubusercontent.com/o-some/tulasisland')) throw new Error('source.html does not look like untouched source snapshot');
 
