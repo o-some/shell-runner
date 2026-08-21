@@ -61,6 +61,19 @@ for (const file of bossAssets) {
   if (!html.includes('./' + file)) throw new Error(`Runtime does not reference boss asset: ${file}`);
 }
 if (html.includes('id="bossResultPortrait" src="data:image')) throw new Error('Boss result still uses embedded/broken data URI');
+
+if (!html.includes('Shell Runner boss gameplay polish v1.5')) throw new Error('Boss gameplay polish missing');
+if (!html.includes('runner-limb-left') || !html.includes('runner-limb-right')) throw new Error('Tula arm reaction overlays missing');
+if (!html.includes('runnerArmUpLeft') || !html.includes('runnerHandMouthLeft')) throw new Error('Tula correct/wrong arm animations missing');
+if (!html.includes('boss-react-startled') || !html.includes('boss-react-laugh')) throw new Error('Boss reaction states missing');
+if (!html.includes('bossHandsMouthLeft') || !html.includes('bossLaughBody')) throw new Error('Boss reaction animations missing');
+if (!html.includes('id="bossObjectLayer"') || !html.includes('startBossObjects')) throw new Error('Boss obstacle/collectible layer missing');
+if (!html.includes('createBarrelSvg') || !html.includes('createShellSvg')) throw new Error('Boss barrel/shell vector art missing');
+if (!html.includes('boss-fuse-flame') || !html.includes('barrelWobble')) throw new Error('Lit fuse/wobbling barrel behavior missing');
+if (!html.includes('explodeBossBarrel') || !html.includes('collectBossShell')) throw new Error('Boss object interaction logic missing');
+if (!html.includes("background:radial-gradient(circle,rgba(255,72,72,.52)") || !html.includes("background:radial-gradient(circle,rgba(255,229,133,.7)")) throw new Error('Red/golden object glow missing');
+if (!html.includes('boss-result-hero{position:relative!important;display:grid!important;place-items:end center!important')) throw new Error('Boss result non-overlap layout missing');
+
 if (html.includes('raw.githubusercontent.com/o-some/tulasisland')) throw new Error('Cross-repo runtime asset dependency remains');
 if (!source.includes('raw.githubusercontent.com/o-some/tulasisland')) throw new Error('source.html does not look like untouched source snapshot');
 
