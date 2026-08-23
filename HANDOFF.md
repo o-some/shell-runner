@@ -67,13 +67,15 @@ Standalone HTML/CSS/JavaScript mit reproduzierbarer Enhancer-Pipeline. `source.h
 - `backup/pre-caf-gameplay-expansion-2026-08-23`
 - `backup/pre-caf-release-polish-2026-08-23`
 - `backup/pre-bomb-tap-control-2026-08-23`
+- `backup/pre-live-smoke-proof-2026-08-23`
 
 # Deployment
 - GitHub Pages: https://o-some.github.io/shell-runner/
 - Workflow: `.github/workflows/pages.yml`
+- Nach erfolgreichem Deploy prüft der Workflow die öffentliche Pages-Runtime auf die aktuelle Fairness-/Tap-Control-Version und schreibt die belegte Revision nach `docs/LAST_SUCCESSFUL_DEPLOY.md`.
 
 # Release-Evidence
-Finale Runtime-/Live-SHA wird nach dem Workflow-/Live-Smoke dokumentiert.
+`docs/LAST_SUCCESSFUL_DEPLOY.md` wird ausschließlich nach erfolgreichem Build, Deploy und Live-Smoke vom Workflow erzeugt.
 
 # Do-not-touch
 - kein Force-Push
