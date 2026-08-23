@@ -1,0 +1,9 @@
+candidates:
+  - id: SR-LEARN-001
+    status: candidate
+    scope: project
+    lesson: Boss encounters are more engaging when each boss changes play in a readable, telegraphed way without hiding the learning task.
+  - id: SR-LEARN-002
+    status: candidate
+    scope: project
+    lesson: Post-boss choices can add replay value if they remain short, mobile-friendly and temporary to the current run.

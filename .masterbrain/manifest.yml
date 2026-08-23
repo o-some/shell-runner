@@ -1,0 +1,17 @@
+project:
+  name: Shell Runner
+  repository: o-some/shell-runner
+  type: language-learning-game
+  platform: web-mobile-first
+  live_url: https://o-some.github.io/shell-runner/
+state:
+  baseline_sha: 710cd6e95e7816b83b8dc374346dcaefb937637e
+  source_snapshot: source.html
+  runtime: index.html
+  status: active
+factory:
+  source: ChelonakiAppFactory.md
+  version: 1.1.0
+  masterbrain: 4.6.1
+  bigbrain: 1.1.0
+  modules: [96, 97, 98]

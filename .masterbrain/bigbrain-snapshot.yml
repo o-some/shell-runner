@@ -1,0 +1,23 @@
+factory_version: 1.1.0
+masterbrain_version: 4.6.1
+bigbrain_version: 1.1.0
+packs:
+  games-learning: 1.1.0
+  mobile-interaction: 1.0.0
+  tula-island: 1.0.0
+active_rules:
+  - BB-GAME-002
+  - BB-GAME-005
+  - BB-GAME-008
+  - BB-GAME-009
+  - BB-GAME-010
+  - BB-MOB-002
+  - BB-MOB-006
+  - BB-TULA-001
+  - BB-TULA-002
+  - BB-TULA-003
+  - BB-TULA-004
+  - BB-TULA-005
+  - BB-TULA-006
+scope: project
+frozen_for: caf-gameplay-expansion-v2

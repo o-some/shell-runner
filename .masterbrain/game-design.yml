@@ -1,0 +1,50 @@
+game:
+  name: Shell Runner
+  genre: language-learning endless runner
+  audience: children/families
+  platform: web
+  orientation: portrait-first
+  input: [touch-swipe, keyboard]
+learning:
+  objective: recognize correct vocabulary translations and thematic word associations
+  feedback: immediate visual, haptic-when-supported and retry/revenge feedback
+  wrong_answer: returns as a revenge word after a short delay
+core_loop:
+  action: choose lane for correct word while collecting/avoiding boss objects
+  challenge: vocabulary + readable timing/route/boss modifiers
+  feedback: Tula/boss reactions, particles, combo tier, mastery
+  reward: points, XP, shells, temporary run perks
+  progression: 3 correct normal words -> boss -> treasure choice -> route choice -> next segment
+states:
+  - intro-helper-select
+  - playing
+  - correct-feedback
+  - wrong-feedback
+  - fever
+  - paused
+  - boss-intro
+  - boss-active
+  - boss-result
+  - treasure-choice
+  - route-choice
+  - game-over
+  - restart
+acceptance:
+  gameplay:
+    - combo tiers are visible and deterministic
+    - fever starts at the intended streak and expires safely
+    - wrong normal words reappear as revenge prompts
+    - word mastery advances/reduces without blocking play
+    - risk gates are clearly marked and never obscure text
+    - one helper is selectable and functional per run
+    - all ten bosses have distinct, telegraphed mechanics
+    - shells/barrels include multiple readable variants
+    - post-boss treasure and route choices both work
+  mobile:
+    - primary gameplay remains usable without avoidable vertical scroll
+    - overlays fit small phone viewports
+    - no sprite/FX covers answer text or primary buttons
+  technical:
+    - source.html remains untouched
+    - runtime is reproducibly materialized from scripts
+    - no cross-repo runtime dependencies

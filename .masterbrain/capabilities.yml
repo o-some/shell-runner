@@ -1,0 +1,13 @@
+preferred_route:
+  repository:
+    provider: GitHub connector
+    read: PROVEN_READ
+    write: PROVEN_WRITE
+    evidence: branch/file/commit operations in current project
+  canonical_factory:
+    provider: Dropbox connector
+    read: PROVEN_READ
+local_fallback:
+  git_clone: BLOCKED_NETWORK
+  note: Local DNS failure does not invalidate connector access.
+secrets_stored: false

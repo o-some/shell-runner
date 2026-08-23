@@ -1,0 +1,16 @@
+task: caf-gameplay-expansion-v2
+class: GAME-GAMEPLAY-CHANGE
+goal: >
+  Increase replay value and learning quality with combo tiers, Tula Fever, revenge words,
+  word mastery, risk gates, selectable helpers, unique boss mechanics, expanded boss objects,
+  post-boss treasure choices and route decisions.
+constraints:
+  - keep boss trigger at 3 correct normal words
+  - preserve existing pause limit, lives, wallet and boss result flow unless explicitly extended
+  - no changes to other repositories or games
+  - source.html remains migration snapshot
+  - mobile-first readability dominates decoration
+  - use existing Tula/boss assets first
+release:
+  authorized: true
+  target: GitHub Pages
