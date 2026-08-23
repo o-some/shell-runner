@@ -3,6 +3,8 @@ name: Test and Deploy Shell Runner
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - 'docs/LAST_SUCCESSFUL_DEPLOY.md'
   workflow_dispatch:
 
 permissions:
@@ -58,3 +60,48 @@ jobs:
       - name: Deploy Pages
         id: deployment
         uses: actions/deploy-pages@v4
+      - name: Verify live Pages runtime
+        env:
+          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          set -euo pipefail
+          deployed_sha="$(git rev-parse HEAD)"
+          live_ok=0
+          for attempt in $(seq 1 12); do
+            body="$(curl -fsSL --max-time 20 "${PAGE_URL}" || true)"
+            if printf '%s' "$body" | grep -Fq 'Shell Runner boss fairness + tap control v2.4' \
+              && printf '%s' "$body" | grep -Fq 'tapLaneFromPoint' \
+              && printf '%s' "$body" | grep -Fq 'bossQuestionSafeUntil'; then
+              live_ok=1
+              break
+            fi
+            sleep 5
+          done
+          test "$live_ok" -eq 1
+          printf '%s\n' "$deployed_sha" > /tmp/deployed_sha
+      - name: Record successful deployment evidence
+        env:
+          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          set -euo pipefail
+          deployed_sha="$(cat /tmp/deployed_sha)"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin main
+          git checkout -B main origin/main
+          mkdir -p docs
+          cat > docs/LAST_SUCCESSFUL_DEPLOY.md <<EOF
+          # Last successful Shell Runner deployment
+
+          - deployed_sha: \`$deployed_sha\`
+          - page_url: $PAGE_URL
+          - live_smoke: PASS
+          - checked_features: boss fairness + lower-field tap/click lane control
+          - runtime_marker: Shell Runner boss fairness + tap control v2.4
+          - verified_at_utc: $(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          EOF
+          git add docs/LAST_SUCCESSFUL_DEPLOY.md
+          if ! git diff --cached --quiet; then
+            git commit -m "Record successful Shell Runner deployment [skip ci]"
+            git push origin HEAD:main
+          fi
