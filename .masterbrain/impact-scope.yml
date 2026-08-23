@@ -4,9 +4,11 @@ allowed:
   - scripts/apply-boss-unique-mechanics.mjs
   - scripts/apply-post-boss-choices.mjs
   - package.json
+  - package-lock.json
   - tests/static.test.mjs
   - README.md
   - HANDOFF.md
+  - docs/TEST_CHECKLIST.md
   - .masterbrain/*
 protected:
   - source.html
