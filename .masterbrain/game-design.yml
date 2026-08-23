@@ -4,7 +4,7 @@ game:
   audience: children/families
   platform: web
   orientation: portrait-first
-  input: [touch-swipe, keyboard]
+  input: [touch-swipe, touch-tap-lane, pointer-tap-lane, keyboard]
 learning:
   objective: recognize correct vocabulary translations and thematic word associations
   feedback: immediate visual, haptic-when-supported and retry/revenge feedback
@@ -40,11 +40,17 @@ acceptance:
     - all ten bosses have distinct, telegraphed mechanics
     - shells/barrels include multiple readable variants
     - post-boss treasure and route choices both work
+    - boss barrel hazards provide a protected reading window before they can punish the player
+    - no more than two unresolved barrel hazards pressure Tula at once
+    - tapping or clicking the lower Tula play area moves directly to the tapped lane
+    - existing swipe, gate-click and keyboard lane controls remain functional
   mobile:
     - primary gameplay remains usable without avoidable vertical scroll
     - overlays fit small phone viewports
     - no sprite/FX covers answer text or primary buttons
+    - lower-field tap control works with a finger without fighting the existing swipe gesture
   technical:
     - source.html remains untouched
     - runtime is reproducibly materialized from scripts
     - no cross-repo runtime dependencies
+    - new control/fairness behavior is applied by one final scoped enhancer
