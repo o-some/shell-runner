@@ -1,15 +1,11 @@
-task: caf-gameplay-expansion-v2
+task: caf-boss-fairness-tap-control
 allowed:
-  - scripts/apply-meta-gameplay.mjs
-  - scripts/apply-boss-unique-mechanics.mjs
-  - scripts/apply-post-boss-choices.mjs
+  - scripts/apply-input-fairness.mjs
   - package.json
-  - package-lock.json
-  - tests/*.mjs
-  - README.md
+  - tests/input-fairness.test.mjs
   - HANDOFF.md
-  - docs/TEST_CHECKLIST.md
-  - .masterbrain/*
+  - .masterbrain/game-design.yml
+  - .masterbrain/impact-scope.yml
 protected:
   - source.html
   - assets/bosses/*
@@ -19,6 +15,10 @@ protected:
   - scripts/apply-boss-gameplay-polish.mjs
   - scripts/apply-tula-reaction-sprites.mjs
   - scripts/apply-boss-frequency.mjs
+  - scripts/apply-meta-gameplay.mjs
+  - scripts/apply-boss-unique-mechanics.mjs
+  - scripts/apply-post-boss-choices.mjs
+  - scripts/apply-release-polish.mjs
   - o-some/tulasisland
   - all other game repositories
 rules:
@@ -27,3 +27,4 @@ rules:
   direct_main_write: false
   preserve_existing_gameplay_unless_explicitly_extended: true
   source_snapshot_read_only: true
+  runtime_changes_via_final_enhancer_only: true
