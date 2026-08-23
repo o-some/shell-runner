@@ -5,7 +5,7 @@ allowed:
   - scripts/apply-post-boss-choices.mjs
   - package.json
   - package-lock.json
-  - tests/static.test.mjs
+  - tests/*.mjs
   - README.md
   - HANDOFF.md
   - docs/TEST_CHECKLIST.md
