@@ -7,7 +7,7 @@
     "materialize": "node scripts/materialize.mjs",
     "enhance": "node scripts/apply-game-polish.mjs && node scripts/fix-polish.mjs && node scripts/apply-boss-premium.mjs",
     "sync-runtime": "npm run materialize && npm run enhance && node scripts/apply-dropbox-bosses.mjs && node scripts/apply-boss-gameplay-polish.mjs && node scripts/apply-tula-reaction-sprites.mjs && node scripts/apply-boss-frequency.mjs && node scripts/apply-meta-gameplay.mjs && node scripts/apply-boss-unique-mechanics.mjs && node scripts/apply-post-boss-choices.mjs && node scripts/apply-release-polish.mjs",
-    "test": "node tests/static.test.mjs && node tests/runtime-syntax.test.mjs",
+    "test": "node tests/static.test.mjs && node tests/runtime-syntax.test.mjs && node tests/release-polish.test.mjs",
     "build": "node scripts/build.mjs"
   }
 }
