@@ -29,11 +29,14 @@ Standalone HTML/CSS/JavaScript mit reproduzierbarer Enhancer-Pipeline. `source.h
 - Tula-Fieber: zeitlich begrenzter x2-Punkte-Modus ab hoher Combo.
 - Revanche-Wörter: falsch beantwortete normale Wörter kehren nach kurzer Verzögerung zurück.
 - Wortmeisterschaft: Neu → Gesehen → Geübt → Sicher → Gemeistert; lokal auf dem Gerät gespeichert.
-- Risiko-/Goldtore mit höherer Belohnung und etwas kürzerem Timing.
+- Gold-/Risikoorunden mit höherer Belohnung, ohne das richtige Tor vorab zu verraten.
 - Helferwahl vor dem Run: Lumi, Milo oder Nera.
+- Goldener Kompass wirkt als gelegentlicher, verdienter Hinweis.
 - 10 einzigartige Bossmechaniken: Fassregen, Tor-Tausch, Schattenkopie, Revancheprüfung, Muscheljagd, Haken-Zug, Seitenwind, Kartenmischen, Schattenphase und Varkos-Mehrphasenfinale.
 - Bossobjekte: Gold-, Schutz-, Zeit-, Combo- und Vargas-Muscheln sowie Roll-, Doppel-, Blindgänger- und Königsfässer.
+- Bossobjekte bleiben visuell hinter den Worttoren, damit die Lernaufgabe Vorrang behält.
 - Nach jedem Boss: Auswahl eines temporären Run-Perks und danach Streckenwahl (ruhig, Abenteuer, Schatz).
+- Milo schützt einmal vor Herzverlust und zeigt trotzdem die korrekte Lösung.
 
 # Relevante Dateien
 - `index.html` – materialisierte Runtime
@@ -41,7 +44,10 @@ Standalone HTML/CSS/JavaScript mit reproduzierbarer Enhancer-Pipeline. `source.h
 - `scripts/apply-meta-gameplay.mjs`
 - `scripts/apply-boss-unique-mechanics.mjs`
 - `scripts/apply-post-boss-choices.mjs`
+- `scripts/apply-release-polish.mjs`
 - `tests/static.test.mjs`
+- `tests/runtime-syntax.test.mjs`
+- `tests/release-polish.test.mjs`
 - `.masterbrain/game-design.yml`
 - `.masterbrain/impact-scope.yml`
 
@@ -52,14 +58,15 @@ Standalone HTML/CSS/JavaScript mit reproduzierbarer Enhancer-Pipeline. `source.h
 - Game-Module 96 / Playtest 97 / Release 98
 
 # Rollback
-`backup/pre-caf-gameplay-expansion-2026-08-23`
+- `backup/pre-caf-gameplay-expansion-2026-08-23`
+- `backup/pre-caf-release-polish-2026-08-23`
 
 # Deployment
 - GitHub Pages: https://o-some.github.io/shell-runner/
 - Workflow: `.github/workflows/pages.yml`
 
 # Release-Evidence
-Finale Runtime-/Live-SHA wird nach dem CAF-Release-Smoke in `.masterbrain/game-quality.yml` dokumentiert.
+Finale Runtime-/Live-SHA wird nach dem Workflow-/Live-Smoke dokumentiert.
 
 # Do-not-touch
 - kein Force-Push
