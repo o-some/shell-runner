@@ -1,61 +1,84 @@
-# Test Checklist — Shell Runner
+# Test Checklist — Shell Runner v1.3 CAF Gameplay Expansion
 
 ## Allgemein
-- [ ] Seite lädt
-- [ ] Reload funktioniert
-- [ ] keine weiße/blaue leere Seite
+- [ ] Seite lädt / Reload funktioniert
 - [ ] keine JS-Fehler
 - [ ] keine 404-Assets
 - [ ] Touch/Swipe funktioniert
-- [ ] Desktop-Tastatur/Maus funktioniert
+- [ ] Desktop-Tastatur funktioniert
+- [ ] `source.html` unverändert
 
-## Gameplay
-- [ ] Spiel startet
-- [ ] links/rechts Spurwahl funktioniert
-- [ ] richtige Antwort reagiert korrekt
-- [ ] bei richtiger Antwort erscheint ein kleines Feuerwerk mit Gold-/Türkis-/Weiß-Partikeln
-- [ ] keine künstlichen Tula-Arm-/Kreis-Overlays sichtbar
-- [ ] falsche Antwort reagiert korrekt
-- [ ] falsche Antwort zeigt Rückstoß/Shake und dezente Fehlerfragmente
-- [ ] Leben sinken korrekt
-- [ ] Combo/Punkte funktionieren
+## Normaler Run
+- [ ] Spiel startet mit Helferwahl (Lumi/Milo/Nera)
+- [ ] richtige/falsche Antwort funktionieren
+- [ ] offizielle Tula-Reaktionssprites sichtbar
+- [ ] Combo-Stufen wechseln korrekt
+- [ ] Tula-Fieber startet ab hoher Combo und endet wieder
+- [ ] Gold-/Risiko-Tor ist klar markiert und belohnt korrekt
+- [ ] falsches normales Wort kehrt als Revanche-Wort zurück
+- [ ] Wortmeisterschaft steigt/fällt korrekt und blockiert den Run nicht
+- [ ] Fortschritt zählt nur richtige normale Wörter
+- [ ] nach 3 richtigen normalen Wörtern erscheint der Boss
 - [ ] Pause maximal 2-mal pro Run
-- [ ] Pause/Weiter stellt Ablauf korrekt wieder her
-- [ ] Boss-Intro erscheint
-- [ ] Boss wartet bis „Bosskampf starten“
-- [ ] Bossfrage funktioniert
-- [ ] Boss-Sieg funktioniert
-- [ ] nach Boss-Sieg erscheint „Du hast Captain Shelldon besiegt!“
-- [ ] Boss-Sieg zeigt Bonus und kleines Feuerwerk
-- [ ] Boss-Sieg läuft erst nach Klick auf „Weiter“ weiter
-- [ ] Boss-Niederlage funktioniert ohne normale Leben abzuziehen
-- [ ] Boss-Niederlage zeigt positive Nachricht „Ich ziehe dir keine Herzen ab …“
-- [ ] Boss-Niederlage läuft erst nach Klick auf „Weiter“ weiter
-- [ ] Rückkehr aus Boss in normalen Run funktioniert
-- [ ] Pause-Button steht nach Boss-Ergebnis wieder korrekt auf „Pause (x)“
-- [ ] Game Over funktioniert
-- [ ] Neustart funktioniert
-- [ ] Fortschrittsanzeige funktioniert
 
-## Assets
-- [ ] Hintergrund sichtbar
-- [ ] Tula-Profil sichtbar
-- [ ] Tula-Runner sichtbar
-- [ ] Captain-Shelldon-Bild im Intro sichtbar
-- [ ] Bossbild in Arena sichtbar
-- [ ] kritische Assets HTTP 200
-- [ ] keine Referenz auf `raw.githubusercontent.com/o-some/tulasisland` in Runtime
+## Helfer
+- [ ] Lumi gibt gelegentlich einen dezenten Hinweis
+- [ ] Milo blockiert genau einmal einen normalen Herzverlust
+- [ ] Nera erhöht Muschelgewinn
 
-## Geräte
-- [ ] iPhone Safari / iPhone-Viewport
-- [ ] Android Chrome / Android-Viewport
-- [ ] Desktop Chrome/Chromium
-- [ ] Desktop Safari, wenn verfügbar oder begründet ausstehend
+## Boss allgemein
+- [ ] Boss-Intro wartet auf „Bosskampf starten“
+- [ ] korrekter Boss-Sprite für Level sichtbar
+- [ ] Boss reagiert auf richtige/falsche Antwort
+- [ ] Boss-Niederlage zieht keine normalen Herzen ab
+- [ ] Boss-Sieg/-Niederlage verlangt „Weiter“
+- [ ] Boss-Resultat überlagert keine Grafik/Texte
 
-## Freigabe
-- [ ] GitHub Actions grün
-- [ ] GitHub Pages HTTP 200
-- [ ] Live-URL getestet
-- [ ] letzte getestete Commit-SHA in `HANDOFF.md` dokumentiert
-- [ ] Quell-/Zielbestand verglichen
-- [ ] `REMOVE_OLD_COPY = APPROVED`
+## Einzigartige Bossmechaniken
+- [ ] Level 1 Pirat Kai — Fassregen
+- [ ] Level 2 Kapitän Brax — Tor-Tausch
+- [ ] Level 3 Blackfinn — Schattenkopie
+- [ ] Level 4 Alt-Kapitän Roderick — Revancheprüfung
+- [ ] Level 5 Piratenbaron Vargas — Muscheljagd
+- [ ] Level 6 Kapitän Ironhook — Haken-Zug
+- [ ] Level 7 Admiral Thorne — Seitenwind
+- [ ] Level 8 Kartenmeister Corvin — Kartenmischen
+- [ ] Level 9 Schattenfürst Azrak — Schattenphase
+- [ ] Level 10 Piratenkönig Varkos — Mehrphasenfinale
+
+## Bossobjekte
+- [ ] normale / Gold- / Schutz- / Zeit- / Combo-Muschel
+- [ ] Vargas-Muschel
+- [ ] normales / Roll- / Doppel- / Blindgänger- / Königsfass
+- [ ] gute Objekte goldenes Glühen
+- [ ] gefährliche Objekte rotes Glühen
+- [ ] Lunte/Wackeln/Explosion funktionieren
+- [ ] Schutzmuschel/Schutzschild blockiert korrekt
+
+## Nach dem Boss
+- [ ] Schatzwahl zeigt drei Run-Perks
+- [ ] gewählter Perk wirkt im weiteren Run
+- [ ] danach Streckenwahl erscheint
+- [ ] Ruhiger Pfad: langsamer
+- [ ] Abenteuerpfad: mehr Punkte / schneller
+- [ ] Schatzpfad: mehr Beute / mehr Goldtore
+- [ ] Pause kann Auswahlmodal nicht umgehen
+- [ ] erst danach startet der nächste Abschnitt
+
+## Geräte / Visual QA
+- [ ] 375×667
+- [ ] 390×844
+- [ ] 430×932
+- [ ] Desktop
+- [ ] keine Überlagerung von HUD, Wörtern, Tula, Boss, Objekten oder Modals
+- [ ] keine unnötige vertikale Scrollpflicht im aktiven Spiel
+
+## Release
+- [ ] `npm run sync-runtime`
+- [ ] `npm test`
+- [ ] `npm run build`
+- [ ] GitHub Pages Deploy erfolgreich
+- [ ] Live-URL HTTP 200
+- [ ] Live Start + richtige/falsche Antwort geprüft
+- [ ] Live Boss erreichbar und Bossmechanik sichtbar
+- [ ] fehlende reale Geräteprüfung ehrlich markiert

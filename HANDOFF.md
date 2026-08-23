@@ -5,90 +5,63 @@ Shell Runner
 Mobile-first Sprachlern-Endless-Runner für Tula’s Island.
 
 # Aktuelle Version
-v1.2.0-fireworks-boss-result
-
-# Letzte getestete Commit-SHA
-PENDING_LIVE_TEST_AFTER_BOSS_RESULT_POLISH
+v1.3.0-caf-gameplay-expansion
 
 # Framework
-Standalone HTML/CSS/JavaScript als stabile Übergangsstruktur. Refactoring nach Astro ist erst nach stabil abgeschlossener Migration vorgesehen.
+Standalone HTML/CSS/JavaScript mit reproduzierbarer Enhancer-Pipeline. `source.html` bleibt unveränderte Migrationsquelle.
 
 # Plattformen
 - iOS Safari
 - Android Chrome
-- Desktop Chrome
-- Desktop Safari, wenn verfügbar
+- Desktop Chrome/Safari soweit verfügbar
 
-# Designregeln
-- Tula’s-Island-Look mit dunklem Ozeanblau, Gold und Türkis.
-- Wortwahl muss auf Mobile klar lesbar bleiben.
+# Kernregeln
+- Boss nach 3 **richtigen normalen** Wörtern; Fehler zählen nicht zum Bossfortschritt.
 - Swipe links/rechts ist primäre Steuerung.
 - Pause maximal 2-mal pro Run.
-- Boss-Intro stoppt das Spiel bis „Bosskampf starten“ gedrückt wird.
-- Trefferfeedback bleibt kurz und klar.
-- Keine künstlichen Tula-Arm-/Kreis-Overlays verwenden.
-- Positive Treffer nutzen kleine Feuerwerks-Partikel in Gold/Türkis/Weiß.
+- Boss-Intro stoppt bis „Bosskampf starten“.
+- Normale Leben bleiben bei Boss-Niederlage erhalten.
+- Tula-/Boss-Sprites, Wörter und Hauptaktionen dürfen sich auf Mobile nicht überdecken.
+- Andere Spiele/Repositories bleiben unberührt.
 
-# Aktueller Funktionsstand
-- Endless-Runner-Wortauswahl
-- richtige/falsche Antwort
-- Leben, Combo, Punkte, Muscheln, XP
-- Swipe-/Keyboard-Steuerung
-- Pause mit 2 Nutzungen pro Run
-- Themen-Boss nach regulären Fragen
-- Boss-Sieg/Niederlage
-- Neustart nach Game Over
-- korrekt: Tula-Sprung, Glow, Gate-Pulse, kleines Feuerwerk mit Partikeln, kurze Haptik sofern unterstützt
-- falsch: Tula-Rückstoß, Shake, roter Impact, kleine Fehlerfragmente, Haptik sofern unterstützt
-- keine künstlichen zusätzlichen Arme/Kreise mehr
-- nach Boss-Sieg erscheint eine Bestätigung „Du hast Captain Shelldon besiegt!“ mit Boss-Bonus und „Weiter“-Button
-- nach Boss-Niederlage erscheint eine positive Meldung mit Hinweis, dass keine Herzen abgezogen werden; Weiterlaufen erst nach Klick auf „Weiter“
-- Boss-Ergebnis blockiert Pause/Neustart bis zur Bestätigung
-- `prefers-reduced-motion` wird für Effekte berücksichtigt
+# Gameplay-Erweiterung v1.3
+- Combo-Stufen: Muschel-Serie, Tula-Fieber, Goldene Welle, Insel-Legende.
+- Tula-Fieber: zeitlich begrenzter x2-Punkte-Modus ab hoher Combo.
+- Revanche-Wörter: falsch beantwortete normale Wörter kehren nach kurzer Verzögerung zurück.
+- Wortmeisterschaft: Neu → Gesehen → Geübt → Sicher → Gemeistert; lokal auf dem Gerät gespeichert.
+- Risiko-/Goldtore mit höherer Belohnung und etwas kürzerem Timing.
+- Helferwahl vor dem Run: Lumi, Milo oder Nera.
+- 10 einzigartige Bossmechaniken: Fassregen, Tor-Tausch, Schattenkopie, Revancheprüfung, Muscheljagd, Haken-Zug, Seitenwind, Kartenmischen, Schattenphase und Varkos-Mehrphasenfinale.
+- Bossobjekte: Gold-, Schutz-, Zeit-, Combo- und Vargas-Muscheln sowie Roll-, Doppel-, Blindgänger- und Königsfässer.
+- Nach jedem Boss: Auswahl eines temporären Run-Perks und danach Streckenwahl (ruhig, Abenteuer, Schatz).
 
-# Bekannte Fehler
-Keine freigegebenen bekannten Fehler. Live-/Geräteabnahme der neuen Feuerwerks- und Boss-Ergebnislogik steht noch aus.
+# Relevante Dateien
+- `index.html` – materialisierte Runtime
+- `source.html` – unveränderte Migrationsquelle
+- `scripts/apply-meta-gameplay.mjs`
+- `scripts/apply-boss-unique-mechanics.mjs`
+- `scripts/apply-post-boss-choices.mjs`
+- `tests/static.test.mjs`
+- `.masterbrain/game-design.yml`
+- `.masterbrain/impact-scope.yml`
 
-# Nächste Schritte
-1. Feature-Branch nur fast-forward nach `main`, wenn `main` unverändert ist.
-2. Materialisierung + Gameplay-Polish durch Workflow prüfen.
-3. Smoke-Test und Build prüfen.
-4. GitHub Pages live testen.
-5. Mobile/Desktop-Regressionsprüfung inkl. richtig/falsch und Boss-Sieg/Boss-Niederlage.
-6. Letzte getestete SHA dokumentieren.
-7. Alte Shell-Runner-Kopie in `tulasisland` weiterhin nicht löschen, solange das Migrations-Freigabe-Gate nicht vollständig bestanden ist.
+# CAF-Basis
+- Chelonaki App Factory 1.1.0
+- MasterBrain 4.6.1
+- BigBrain 1.1.0
+- Game-Module 96 / Playtest 97 / Release 98
 
-# Wichtige Dateien
-- `index.html` – aktive Runtime-Version, wird reproduzierbar erzeugt
-- `source.html` – unveränderte Source-Sicherung vom Source-Commit
-- `scripts/materialize.mjs` – reproduzierbare Übernahme und Pfadanpassung
-- `scripts/apply-game-polish.mjs` – Feuerwerks-Partikel und Boss-Ergebnislogik
-- `scripts/fix-polish.mjs` – kleine finale Runtime-CSS-Korrektur
-- `scripts/build.mjs` – Build nach `dist/`
-- `tests/static.test.mjs` – Smoke-/Integritätschecks
-- `docs/MIGRATION_RECORD.md`
-- `docs/ASSET_MANIFEST.md`
-- `docs/TEST_CHECKLIST.md`
-
-# Do-not-touch-Bereiche
-- Keine Änderungen an anderen Spiele-Repositories.
-- `o-some/tulasisland` während der Verifikation nicht löschen/verändern, außer später explizit für die freigegebene Shell-Runner-Entfernung.
-- Kein Force-Push.
-
-# Assets
-Quelle: `o-some/tulasisland` am Source-Commit `892f676fbcef77ab49373aef7865d60afba0ebb7`.
-Runtime-Zielpfade siehe `docs/ASSET_MANIFEST.md`.
+# Rollback
+`backup/pre-caf-gameplay-expansion-2026-08-23`
 
 # Deployment
-- GitHub Pages URL: https://o-some.github.io/shell-runner/
+- GitHub Pages: https://o-some.github.io/shell-runner/
 - Workflow: `.github/workflows/pages.yml`
 
-# Letzter erfolgreicher Test
-PENDING_LIVE_TEST_AFTER_BOSS_RESULT_POLISH
+# Release-Evidence
+Finale Runtime-/Live-SHA wird nach dem CAF-Release-Smoke in `.masterbrain/game-quality.yml` dokumentiert.
 
-# Wichtige Regeln
-- Keine funktionierende Funktion ohne Anweisung entfernen.
-- Vor jedem Write aktuellen `main` neu lesen.
-- Kein Force-Push.
-- Mobile immer mitprüfen.
-- Vor großen Änderungen Sicherungs-/Rollback-Punkt setzen.
+# Do-not-touch
+- kein Force-Push
+- keine Änderungen an anderen Spiele-Repositories
+- `o-some/tulasisland` nicht verändern oder alte Kopie entfernen, solange separate Migrationsfreigabe nicht abgeschlossen ist
