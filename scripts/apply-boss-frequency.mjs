@@ -11,10 +11,10 @@ if (html.includes(marker)) {
 
 const laneAnchor = "const $=id=>document.getElementById(id), shuffle=a=>[...a].sort(()=>Math.random()-.5), laneLeft=['24%','50%','76%'];";
 if (!html.includes(laneAnchor)) throw new Error('Boss frequency lane anchor missing');
-html = html.replace(laneAnchor, `${laneAnchor}\nconst BOSS_CORRECT_INTERVAL=3;`);
+html = html.replace(laneAnchor, `${laneAnchor}\nconst BOSS_CORRECT_INTERVAL=10;`);
 
 const introOld = 'Nach 15 Wörtern wartet ein Themen-Boss.';
-const introNew = 'Nach 3 richtigen Wörtern wartet ein Themen-Boss.';
+const introNew = 'Nach 10 richtigen Wörtern wartet ein Themen-Boss.';
 if (!html.includes(introOld)) throw new Error('Boss frequency intro copy anchor missing');
 html = html.replace(introOld, introNew);
 
@@ -46,4 +46,4 @@ html = html.replace(startBossOld, startBossNew);
 html = html.replace('</style>', `${marker}\n</style>`);
 
 await fs.writeFile(path, html, 'utf8');
-console.log('Boss frequency changed to 3 correct normal words.');
+console.log('Boss frequency changed to 10 correct normal words.');

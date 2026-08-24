@@ -1,4 +1,4 @@
-factory_version: 1.1.0
+factory_version: 1.2.0
 masterbrain_version: 4.6.1
 bigbrain_version: 1.1.0
 packs:
@@ -12,6 +12,8 @@ active_rules:
   - BB-GAME-009
   - BB-GAME-010
   - BB-MOB-002
+  - BB-MOB-003
+  - BB-MOB-004
   - BB-MOB-006
   - BB-TULA-001
   - BB-TULA-002
@@ -20,4 +22,4 @@ active_rules:
   - BB-TULA-005
   - BB-TULA-006
 scope: project
-frozen_for: caf-gameplay-expansion-v2
+frozen_for: caf-boss-progression-v3
