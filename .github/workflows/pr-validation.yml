@@ -27,3 +27,13 @@ jobs:
         run: npm test
       - name: Build
         run: npm run build
+      - name: Observe deployed Pages runtime
+        run: |
+          set -euo pipefail
+          body="$(curl -fsSL --max-time 20 https://o-some.github.io/shell-runner/)"
+          printf '%s' "$body" | grep -Fq 'Shell Runner boss progression + roster v3.0'
+          printf '%s' "$body" | grep -Fq 'const BOSS_CORRECT_INTERVAL=10;'
+          printf '%s' "$body" | grep -Fq 'const BOSS_MAX_HP=10;'
+          printf '%s' "$body" | grep -Fq 'bossRosterTrack'
+          printf '%s' "$body" | grep -Fq 'bossAbilityName'
+          echo 'Public Pages runtime contains Shell Runner boss progression v3 markers.'
