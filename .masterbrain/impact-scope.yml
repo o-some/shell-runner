@@ -1,24 +1,35 @@
-task: caf-boss-fairness-tap-control
+task: caf-boss-hp-roster-progression-v3
+baseline_sha: af94bd06561b27dc9ff004bf1ffa0936c376cf8f
+work_branch: feature/caf-boss-progression-v3
+rollback_branch: backup/pre-boss-hp-roster-progression-2026-08-24
 allowed:
-  - scripts/apply-input-fairness.mjs
+  - scripts/apply-boss-frequency.mjs
+  - scripts/apply-boss-progression-ui.mjs
   - package.json
-  - tests/input-fairness.test.mjs
+  - package-lock.json
+  - tests/static.test.mjs
+  - tests/boss-progression-ui.test.mjs
   - HANDOFF.md
+  - .github/workflows/pages.yml
   - .masterbrain/game-design.yml
   - .masterbrain/impact-scope.yml
+  - .masterbrain/bigbrain-snapshot.yml
+  - index.html # generated/materialized runtime only; no direct hand edit
+  - docs/LAST_SUCCESSFUL_DEPLOY.md # workflow-generated evidence only
 protected:
   - source.html
   - assets/bosses/*
   - assets/characters/*
+  - assets/backgrounds/*
   - scripts/materialize.mjs
   - scripts/apply-dropbox-bosses.mjs
   - scripts/apply-boss-gameplay-polish.mjs
   - scripts/apply-tula-reaction-sprites.mjs
-  - scripts/apply-boss-frequency.mjs
   - scripts/apply-meta-gameplay.mjs
   - scripts/apply-boss-unique-mechanics.mjs
   - scripts/apply-post-boss-choices.mjs
   - scripts/apply-release-polish.mjs
+  - scripts/apply-input-fairness.mjs
   - o-some/tulasisland
   - all other game repositories
 rules:
@@ -28,3 +39,6 @@ rules:
   preserve_existing_gameplay_unless_explicitly_extended: true
   source_snapshot_read_only: true
   runtime_changes_via_final_enhancer_only: true
+  boss_roster_is_informational_not_progress_teleport: true
+  keep_existing_two_pause_limit: true
+  keep_existing_three_boss-miss_limit: true
