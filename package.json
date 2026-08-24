@@ -1,13 +1,13 @@
 {
   "name": "shell-runner",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "private": true,
   "type": "module",
   "scripts": {
     "materialize": "node scripts/materialize.mjs",
     "enhance": "node scripts/apply-game-polish.mjs && node scripts/fix-polish.mjs && node scripts/apply-boss-premium.mjs",
-    "sync-runtime": "npm run materialize && npm run enhance && node scripts/apply-dropbox-bosses.mjs && node scripts/apply-boss-gameplay-polish.mjs && node scripts/apply-tula-reaction-sprites.mjs && node scripts/apply-boss-frequency.mjs && node scripts/apply-meta-gameplay.mjs && node scripts/apply-boss-unique-mechanics.mjs && node scripts/apply-post-boss-choices.mjs && node scripts/apply-release-polish.mjs && node scripts/apply-input-fairness.mjs",
-    "test": "node tests/static.test.mjs && node tests/runtime-syntax.test.mjs && node tests/release-polish.test.mjs && node tests/input-fairness.test.mjs",
+    "sync-runtime": "npm run materialize && npm run enhance && node scripts/apply-dropbox-bosses.mjs && node scripts/apply-boss-gameplay-polish.mjs && node scripts/apply-tula-reaction-sprites.mjs && node scripts/apply-boss-frequency.mjs && node scripts/apply-meta-gameplay.mjs && node scripts/apply-boss-unique-mechanics.mjs && node scripts/apply-post-boss-choices.mjs && node scripts/apply-release-polish.mjs && node scripts/apply-input-fairness.mjs && node scripts/apply-boss-progression-ui.mjs",
+    "test": "node tests/static.test.mjs && node tests/runtime-syntax.test.mjs && node tests/release-polish.test.mjs && node tests/input-fairness.test.mjs && node tests/boss-progression-ui.test.mjs",
     "build": "node scripts/build.mjs"
   }
 }
