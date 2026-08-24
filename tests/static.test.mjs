@@ -38,7 +38,7 @@ must('Shell Runner official Tula reaction sprites v1.6','Official Tula reaction 
 must('./assets/characters/tula-celebrating.webp','Celebrating sprite missing');must('./assets/characters/tula-surprised.webp','Surprised sprite missing');
 must('TULA_REACTION_SPRITES','Tula sprite switching missing');must('.runner .runner-limb{display:none!important}','Synthetic Tula limbs are not disabled');
 
-must('Shell Runner boss frequency v1.7','Boss frequency enhancer missing');must('const BOSS_CORRECT_INTERVAL=3;','Boss interval must be 3 correct words');
+must('Shell Runner boss frequency v1.7','Boss frequency enhancer missing');must('const BOSS_CORRECT_INTERVAL=10;','Boss interval must be 10 correct words');
 must('bossCorrect:0','Boss correct counter missing');must('if(correct)s.bossCorrect++','Boss progress must increment only on correct normal answers');
 must('s.bossCorrect>=BOSS_CORRECT_INTERVAL','Boss trigger does not use correct-word progress');
 mustNot('s.answered%15===0','Legacy 15-question boss trigger remains');
