@@ -1,16 +1,18 @@
 task: caf-boss-hp-roster-progression-v3
 baseline_sha: af94bd06561b27dc9ff004bf1ffa0936c376cf8f
-work_branch: feature/caf-boss-progression-v3
+work_branch: fix/caf-boss-progression-ci-validation
 rollback_branch: backup/pre-boss-hp-roster-progression-2026-08-24
 allowed:
   - scripts/apply-boss-frequency.mjs
   - scripts/apply-boss-progression-ui.mjs
+  - scripts/apply-boss-progression-copy.mjs
   - package.json
   - package-lock.json
   - tests/static.test.mjs
   - tests/boss-progression-ui.test.mjs
   - HANDOFF.md
   - .github/workflows/pages.yml
+  - .github/workflows/pr-validation.yml
   - .masterbrain/game-design.yml
   - .masterbrain/impact-scope.yml
   - .masterbrain/bigbrain-snapshot.yml
@@ -39,6 +41,7 @@ rules:
   preserve_existing_gameplay_unless_explicitly_extended: true
   source_snapshot_read_only: true
   runtime_changes_via_final_enhancer_only: true
+  preserve_legacy_meta_intro_anchor_until_final_copy_step: true
   boss_roster_is_informational_not_progress_teleport: true
   keep_existing_two_pause_limit: true
-  keep_existing_three_boss-miss_limit: true
+  keep_existing_three_boss-miss-limit: true

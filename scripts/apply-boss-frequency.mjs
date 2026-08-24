@@ -13,8 +13,11 @@ const laneAnchor = "const $=id=>document.getElementById(id), shuffle=a=>[...a].s
 if (!html.includes(laneAnchor)) throw new Error('Boss frequency lane anchor missing');
 html = html.replace(laneAnchor, `${laneAnchor}\nconst BOSS_CORRECT_INTERVAL=10;`);
 
+// Keep the historical 3-word copy only as an internal pipeline anchor for the
+// following meta-gameplay enhancer. The final v1.4 copy enhancer changes the
+// player-visible text to 10 after all legacy anchor-dependent steps have run.
 const introOld = 'Nach 15 Wörtern wartet ein Themen-Boss.';
-const introNew = 'Nach 10 richtigen Wörtern wartet ein Themen-Boss.';
+const introNew = 'Nach 3 richtigen Wörtern wartet ein Themen-Boss.';
 if (!html.includes(introOld)) throw new Error('Boss frequency intro copy anchor missing');
 html = html.replace(introOld, introNew);
 
