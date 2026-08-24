@@ -69,7 +69,11 @@ jobs:
           live_ok=0
           for attempt in $(seq 1 12); do
             body="$(curl -fsSL --max-time 20 "${PAGE_URL}" || true)"
-            if printf '%s' "$body" | grep -Fq 'Shell Runner boss fairness + tap control v2.4' \
+            if printf '%s' "$body" | grep -Fq 'Shell Runner boss progression + roster v3.0' \
+              && printf '%s' "$body" | grep -Fq 'const BOSS_CORRECT_INTERVAL=10;' \
+              && printf '%s' "$body" | grep -Fq 'const BOSS_MAX_HP=10;' \
+              && printf '%s' "$body" | grep -Fq 'bossRosterTrack' \
+              && printf '%s' "$body" | grep -Fq 'bossAbilityName' \
               && printf '%s' "$body" | grep -Fq 'tapLaneFromPoint' \
               && printf '%s' "$body" | grep -Fq 'bossQuestionSafeUntil'; then
               live_ok=1
@@ -96,8 +100,8 @@ jobs:
           - deployed_sha: \`$deployed_sha\`
           - page_url: $PAGE_URL
           - live_smoke: PASS
-          - checked_features: boss fairness + lower-field tap/click lane control
-          - runtime_marker: Shell Runner boss fairness + tap control v2.4
+          - checked_features: 10-word boss progression + 10 HP bosses + ability intro + boss roster + top pause + boss fairness + lower-field tap/click lane control
+          - runtime_marker: Shell Runner boss progression + roster v3.0
           - verified_at_utc: $(date -u +"%Y-%m-%dT%H:%M:%SZ")
           EOF
           git add docs/LAST_SUCCESSFUL_DEPLOY.md
