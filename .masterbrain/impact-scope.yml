@@ -1,6 +1,6 @@
 task: caf-boss-hp-roster-progression-v3
 baseline_sha: af94bd06561b27dc9ff004bf1ffa0936c376cf8f
-work_branch: fix/caf-boss-progression-ci-validation
+work_branch: fix/caf-pages-live-smoke-pipefail
 rollback_branch: backup/pre-boss-hp-roster-progression-2026-08-24
 allowed:
   - scripts/apply-boss-frequency.mjs
@@ -10,6 +10,7 @@ allowed:
   - package-lock.json
   - tests/static.test.mjs
   - tests/boss-progression-ui.test.mjs
+  - tests/workflow-smoke.test.mjs
   - HANDOFF.md
   - .github/workflows/pages.yml
   - .github/workflows/pr-validation.yml
@@ -44,4 +45,5 @@ rules:
   preserve_legacy_meta_intro_anchor_until_final_copy_step: true
   boss_roster_is_informational_not_progress_teleport: true
   keep_existing_two_pause_limit: true
-  keep_existing_three_boss-miss-limit: true
+  keep_existing_three_boss_miss_limit: true
+  live_smoke_must_not_use_pipefail_sensitive_short_circuit_pipes: true
