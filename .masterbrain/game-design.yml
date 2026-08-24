@@ -12,9 +12,9 @@ learning:
 core_loop:
   action: choose lane for correct word while collecting/avoiding boss objects
   challenge: vocabulary + readable timing/route/boss modifiers
-  feedback: Tula/boss reactions, particles, combo tier, mastery
+  feedback: Tula/boss reactions, particles, combo tier, mastery, boss HP
   reward: points, XP, shells, temporary run perks
-  progression: 3 correct normal words -> boss -> treasure choice -> route choice -> next segment
+  progression: 10 correct normal words -> 10 HP boss -> treasure choice -> route choice -> next segment
 states:
   - intro-helper-select
   - playing
@@ -31,13 +31,18 @@ states:
   - restart
 acceptance:
   gameplay:
+    - boss encounter starts only after 10 correct normal words; wrong answers do not advance boss progress
+    - every boss starts with exactly 10 HP and every correct boss word removes exactly 1 HP
+    - a boss is defeated at 0 HP; three boss mistakes can still end the encounter without consuming normal hearts
+    - boss HP and remaining pre-boss progress are clearly visible in the shared HUD progress area
     - combo tiers are visible and deterministic
     - fever starts at the intended streak and expires safely
     - wrong normal words reappear as revenge prompts
     - word mastery advances/reduces without blocking play
     - risk gates are clearly marked and never obscure text
     - one helper is selectable and functional per run
-    - all ten bosses have distinct, telegraphed mechanics
+    - all ten bosses have distinct, telegraphed mechanics that preserve the learning decision
+    - Varkos changes five phases according to HP loss rather than a fixed five-question fight
     - shells/barrels include multiple readable variants
     - post-boss treasure and route choices both work
     - boss barrel hazards provide a protected reading window before they can punish the player
@@ -46,11 +51,15 @@ acceptance:
     - existing swipe, gate-click and keyboard lane controls remain functional
   mobile:
     - primary gameplay remains usable without avoidable vertical scroll
-    - overlays fit small phone viewports
+    - boss intro names the boss ability and explains it in readable mobile text before combat starts
+    - boss intro overlays fit small phone viewports without hiding the Bosskampf starten action
+    - bottom boss roster shows all ten bosses and clearly marks current and next boss
+    - boss roster items are tappable/clickable for informational detail without changing progression
+    - pause is a prominent touch target in the upper-right area and retains the two-pause limit
     - no sprite/FX covers answer text or primary buttons
     - lower-field tap control works with a finger without fighting the existing swipe gesture
   technical:
     - source.html remains untouched
     - runtime is reproducibly materialized from scripts
     - no cross-repo runtime dependencies
-    - new control/fairness behavior is applied by one final scoped enhancer
+    - the new boss progression/UI behavior is applied by one final scoped enhancer after fairness/tap control
